@@ -1,100 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<section>
-		<div class="container p-5">
-			<p class="text-center fs-3 mt-4">Admin Dashboard</p>
-			<div class="row p-5">
-				<div class="col-md-4 mt-2">
-					<a href="/admin/loadAddProduct" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-square-plus fa-3x"></i>
-								<h4>Add Product</h4>
-							</div>
-						</div>
-					</a>
-				</div>
+      th:replace="~{admin/admin_base::layout(~{::section})}">
 
+<section>
+    <div class="container py-5">
+        <h2 class="text-center fw-bold mb-4 fade-in">Panel de Administración</h2>
+        <p class="text-center text-muted mb-5 fade-in">Gestiona tu e-commerce de manera clara, rápida y elegante.</p>
+        <div class="row g-4 justify-content-center">
 
-				<div class="col-md-4 mt-2">
-					<a href="/admin/category" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-warning">
-								<i class="fa-solid fa-list fa-3x"></i>
-								<h4>Add Category</h4>
-							</div>
-						</div>
-					</a>
-				</div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/loadAddProduct" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-square-plus fa-3x mb-3 text-primary"></i>
+                        <h6 class="fw-semibold text-dark">Agregar Producto</h6>
+                    </div>
+                </a>
+            </div>
 
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/category" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-list fa-3x mb-3 text-info"></i>
+                        <h6 class="fw-semibold text-dark">Agregar Categoría</h6>
+                    </div>
+                </a>
+            </div>
 
-				<div class="col-md-4 mt-2">
-					<a href="/admin/products" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-success">
-								<i class="fa-solid fa-table-list fa-3x"></i>
-								<h4>View Product</h4>
-							</div>
-						</div>
-					</a>
-				</div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/products" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-table-list fa-3x mb-3 text-success"></i>
+                        <h6 class="fw-semibold text-dark">Ver Productos</h6>
+                    </div>
+                </a>
+            </div>
 
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/orders" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-box-open fa-3x mb-3 text-warning"></i>
+                        <h6 class="fw-semibold text-dark">Pedidos</h6>
+                    </div>
+                </a>
+            </div>
 
-				<div class="col-md-4 mt-4">
-					<a href="/admin/orders" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-warning">
-								<i class="fa-solid fa-box-open fa-3x"></i>
-								<h4>Orders</h4>
-							</div>
-						</div>
-					</a>
-				</div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/users?type=1" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-circle-user fa-3x mb-3 text-primary"></i>
+                        <h6 class="fw-semibold text-dark">Usuarios</h6>
+                    </div>
+                </a>
+            </div>
 
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/add-admin" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-user-plus fa-3x mb-3 text-success"></i>
+                        <h6 class="fw-semibold text-dark">Agregar Admin</h6>
+                    </div>
+                </a>
+            </div>
 
-				<div class="col-md-4 mt-4">
-					<a href="/admin/users?type=1" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-circle-user fa-3x"></i>
-								<h4>Users</h4>
-							</div>
-						</div>
-					</a>
-				</div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a href="/admin/users?type=2" class="text-decoration-none">
+                    <div class="card text-center p-4 shadow card-hover fade-in">
+                        <i class="fa-solid fa-user-shield fa-3x mb-3 text-info"></i>
+                        <h6 class="fw-semibold text-dark">Ver Admins</h6>
+                    </div>
+                </a>
+            </div>
 
+        </div>
+    </div>
+</section>
 
-				<div class="col-md-4 mt-4">
-					<a href="/admin/add-admin" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-user-plus fa-3x"></i>
-								<h4>Add Admin</h4>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				<div class="col-md-4 mt-4">
-					<a href="/admin/users?type=2" class="text-decoration-none">
-						<div class="card card-sh">
-							<div class="card-body text-center text-primary">
-								<i class="fa-solid fa-circle-user fa-3x"></i>
-								<h4>Admin</h4>
-							</div>
-						</div>
-					</a>
-				</div>
-
-
-			</div>
-		</div>
-	</section>
-</body>
 </html>
