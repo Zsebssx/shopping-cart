@@ -1,92 +1,182 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	 th:replace="~{admin/admin_base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/admin_base::layout(~{::section})}">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>Agregar Producto - Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
-	<section>
-		<div class="container p-5 mt-3">
-			<div class="row">
-				<div class="col-md-6 offset-md-3">
-					<div class="card card-sh">
-						<div class="card-header text-center ">
-							<p class="fs-4">Add Product</p>
+<section>
+    <style>
+        :root {
+            --bg-page: rgb(238, 239, 224);
+            --card-bg: rgb(245, 236, 224);
+            --card-shadow: rgba(51, 109, 130, 0.15);
+            --text-primary: rgb(51, 109, 130);
+            --text-secondary: rgb(95, 153, 174);
+            --input-bg: rgb(209, 216, 190);
+            --input-border: rgb(167, 193, 168);
+            --btn-bg: rgb(51, 109, 130);
+            --btn-hover: rgb(95, 153, 174);
+        }
 
-							<th:block th:if="${session.succMsg}">
-								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+        body {
+            margin: 0;
+            padding-top: 80px;
+            background: var(--bg-page);
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
 
-							<th:block th:if="${session.errorMsg}">
-								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+        .container {
+            max-width: 760px;
+            margin: 50px auto;
+            padding: 25px;
+        }
 
-						</div>
-						<div class="card-body">
-							<form action="/admin/saveProduct" method="post"
-								enctype="multipart/form-data">
-								<div class="mb-3">
-									<label>Enter Title</label> <input type="text" name="title"
-										class="form-control">
-								</div>
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            border: none;
+            overflow: hidden;
+        }
 
-								<div class="mb-3">
-									<label>Enter Description</label>
-									<textarea rows="3" cols="" class="form-control"
-										name="description"></textarea>
-								</div>
+        .card-header {
+            background: transparent;
+            border-bottom: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.6rem;
+            text-align: center;
+            padding: 15px 0;
+        }
 
-								<div class="mb-3">
-									<label>Category</label> <select class="form-control"
-										name="category">
-										<option>--select--</option>
-										<option th:each="c:${categories}">[[${c.name}]]</option>
-									</select>
-								</div>
+        .form-label, label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
 
-								<div class="mb-3">
-									<label>Enter Price</label> <input type="number" name="price"
-										class="form-control">
-								</div>
-								<div class="mb-3">
-									<label>Status</label>
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            padding: 10px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
 
-									<div class="form-check">
-										<input class="form-check-input" type="radio" checked
-											value="true" name="isActive" id="flexRadioDefault1">
-										<label class="form-check-label" for="flexRadioDefault1">
-											Active </label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="isActive"
-											value="false" id="flexRadioDefault2"> <label
-											class="form-check-label" for="flexRadioDefault2">
-											Inactive </label>
-									</div>
+        .form-control:focus {
+            border-color: var(--btn-bg);
+            box-shadow: 0 0 8px rgba(51, 109, 130, 0.3);
+            outline: none;
+        }
 
-								</div>
-								<div class="row">
+        .btn-primary {
+            background: var(--btn-bg);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 12px;
+            transition: background 0.3s, transform 0.2s;
+        }
 
-									<div class="mb-3 col">
-										<label>Enter Stock</label> <input type="text" name="stock"
-											class="form-control">
-									</div>
+        .btn-primary:hover {
+            background: var(--btn-hover);
+            transform: scale(1.02);
+        }
 
-									<div class="mb-3 col">
-										<label>Upload Image</label> <input type="file" name="file"
-											class="form-control">
-									</div>
-								</div>
-								<button class="btn btn-primary col-md-12">Submit</button>
-							</form>
-						</div>
+        .text-success {
+            color: green;
+            font-weight: 600;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: 600;
+        }
+    </style>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Agregar Producto
+                <div>
+                    <th:block th:if="${session.succMsg}">
+                        <p class="text-success mt-2">[[${session.succMsg}]]</p>
+                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+
+                    <th:block th:if="${session.errorMsg}">
+                        <p class="text-danger mt-2">[[${session.errorMsg}]]</p>
+                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <form action="/admin/saveProduct" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">Titulo del Producto</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Descripcion</label>
+                        <textarea rows="3" name="description" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-control" name="category" required>
+                            <option disabled selected>-- Seleccionar --</option>
+                            <option th:each="c:${categories}" th:value="${c.name}">[[${c.name}]]</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="number" name="price" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+					    <label class="form-label d-block">Estado</label>
+					    <div class="d-flex gap-3 align-items-center">
+					        <div class="form-check">
+					            <input class="form-check-input" type="radio" value="true" name="isActive" id="activo" checked>
+					            <label class="form-check-label" for="activo">Activo</label>
+					        </div>
+					        <div class="form-check">
+					            <input class="form-check-input" type="radio" value="false" name="isActive" id="inactivo">
+					            <label class="form-check-label" for="inactivo">Inactivo</label>
+					        </div>
+					    </div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Stock</label>
+                            <input type="number" name="stock" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Imagen del Producto</label>
+                            <input type="file" name="file" class="form-control">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2">
+                        <i class="fa-solid fa-paper-plane"></i> Guardar Producto
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
