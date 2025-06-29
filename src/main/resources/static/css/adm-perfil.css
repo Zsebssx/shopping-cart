@@ -1,0 +1,86 @@
+:root {
+    --profile-bg: #F4EBD3;
+    --profile-card-bg: #FFFBDE;
+    --profile-primary: #4682A9;
+    --profile-secondary: #749BC2;
+    --profile-hover: #91C8E4;
+    --profile-text: #555879;
+}
+
+.admprofile-body {
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--profile-text);
+}
+
+.admprofile-card {
+    background: var(--profile-card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(70, 130, 169, 0.15);
+    border: 1px solid #DED3C4;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.admprofile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(70, 130, 169, 0.25);
+}
+
+.admprofile-btn {
+    background: linear-gradient(90deg, var(--profile-primary), var(--profile-secondary));
+    color: #FFFBDE;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.admprofile-btn:hover {
+    background: linear-gradient(90deg, var(--profile-secondary), var(--profile-primary));
+    transform: scale(1.03);
+}
+
+.admprofile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--profile-secondary);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.admprofile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(70, 130, 169, 0.3);
+}
+
+.form-control {
+    border-radius: 8px;
+    background: #f0ead2;
+    border: 1px solid #98A1BC;
+    color: var(--profile-text);
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--profile-primary);
+    box-shadow: 0 0 6px rgba(70, 130, 169, 0.5);
+    background: #fff;
+    outline: none;
+}
+
+.alert-success {
+    color: var(--profile-primary);
+    font-weight: 600;
+}
+
+.alert-danger {
+    color: #A94442;
+    font-weight: 600;
+}
+
+h2 {
+    color: var(--profile-primary);
+    font-weight: 700;
+}
