@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{admin/admin_base::layout(~{::section})}">
 
-<head>
-   <meta charset="UTF-8">
-   <title>Administrar Categorías</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
+<th:block th:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/adm-categ.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</th:block>
 
-<body>
 <section>
 
-<div class="container-fluid p-5 mt-4">
+<div class="container-fluid p-5 mt-4 categ-body">
     <div class="row">
+
         <!-- Formulario Agregar Categoría -->
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
+            <div class="categ-card">
+                <div class="categ-card-header">
                     <p class="fs-6 mb-0">Agregar Categoría</p>
                 </div>
                 <div class="card-body">
@@ -31,13 +30,13 @@
 
                     <form action="/admin/saveCategory" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label>Nombre de la Categoría</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <label class="categ-form-label">Nombre de la Categoría</label>
+                            <input type="text" name="name" class="categ-form-control" required>
                         </div>
 
                         <div class="row mb-3 align-items-center">
                             <div class="col-md-3">
-                                <label>Estado</label>
+                                <label class="categ-form-label">Estado</label>
                             </div>
                             <div class="col-md-9 d-flex gap-3">
                                 <div class="form-check">
@@ -52,11 +51,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label>Subir Imagen</label>
-                            <input type="file" name="file" class="form-control">
+                            <label class="categ-form-label">Subir Imagen</label>
+                            <input type="file" name="file" class="categ-form-control">
                         </div>
 
-                        <button class="btn btn-primary w-100 mt-2" type="submit">
+                        <button class="categ-btn-primary w-100 mt-2" type="submit">
                             <i class="fa-solid fa-floppy-disk"></i> Guardar
                         </button>
                     </form>
@@ -66,12 +65,12 @@
 
         <!-- Tabla de Categorías -->
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
+            <div class="categ-card">
+                <div class="categ-card-header">
                     <p class="fs-6 mb-0">Detalle de Categorías</p>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <table class="table categ-table table-hover">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -82,20 +81,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="cat,c:${categorys}">
+                        <tr th:each="cat, c : ${categorys}">
                             <td>[[${c.count}]]</td>
                             <td>[[${cat.name}]]</td>
                             <td>
                                 <span th:text="${cat.isActive} ? 'Activo' : 'Inactivo'"></span>
                             </td>
                             <td>
-                                <img th:src="@{'/img/category_img/'+${cat.imageName}}" width="50" height="50" class="rounded-img">
+                                <img th:src="@{'/img/category_img/' + ${cat.imageName}}" width="50" height="50" class="categ-rounded-img">
                             </td>
                             <td>
-                                <a th:href="@{'/admin/loadEditCategory/'+${cat.id}}" class="btn btn-primary btn-sm mb-1">
+                                <a th:href="@{'/admin/loadEditCategory/' + ${cat.id}}" class="categ-btn-primary btn-sm mb-1">
                                     <i class="fa-solid fa-pen-to-square"></i> Editar
                                 </a>
-                                <a th:href="@{'/admin/deleteCategory/'+${cat.id}}" class="btn btn-danger btn-sm mb-1">
+                                <a th:href="@{'/admin/deleteCategory/' + ${cat.id}}" class="categ-btn-danger btn-sm mb-1">
                                     <i class="fa-solid fa-trash"></i> Eliminar
                                 </a>
                             </td>
@@ -104,22 +103,22 @@
                     </table>
 
                     <!-- Paginación -->
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-md-4">Total Categorías: [[${totalElements}]]</div>
                         <div class="col-md-8">
                             <nav>
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item" th:classappend="${isFirst} ? 'disabled'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo-1}}" aria-label="Anterior">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo=' + ${pageNo - 1}}" aria-label="Anterior">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                     <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
-                                        th:classappend="${pageNo+1 == i} ? 'active'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a>
+                                        th:classappend="${pageNo + 1 == i} ? 'active'">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo=' + ${i - 1}}">[[${i}]]</a>
                                     </li>
                                     <li class="page-item" th:classappend="${isLast} ? 'disabled'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo+1}}" aria-label="Siguiente">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo=' + ${pageNo + 1}}" aria-label="Siguiente">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -137,137 +136,10 @@
 
 <!-- Botón Volver -->
 <div class="text-center mt-3">
-    <a href="/admin/" class="btn btn-secondary-custom">
+    <a href="/admin/" class="categ-btn-secondary-custom">
         <i class="fa-solid fa-arrow-left"></i> Volver al Panel
     </a>
 </div>
 
 </section>
-</body>
 </html>
-
-<style>
-:root {
-    --bg-page: #FFFBDE;
-    --card-bg: #FFFFFF;
-    --card-border: #DED3C4;
-    --header-bg: linear-gradient(90deg, #91C8E4, #749BC2);
-    --header-text: #FFFFFF;
-    --btn-bg: linear-gradient(90deg, #91C8E4, #749BC2);
-    --btn-hover-bg: linear-gradient(90deg, #749BC2, #4682A9);
-    --text-primary: #4682A9;
-    --text-secondary: #555879;
-    --input-bg: #F4EBD3;
-    --input-border: #DED3C4;
-    --input-focus: #91C8E4;
-    --placeholder-text: #98A1BC;
-    --table-row-hover: #F4EBD3;
-}
-
-body {
-    background: var(--bg-page);
-    font-family: 'Segoe UI', sans-serif;
-    color: var(--text-primary);
-}
-
-.card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
-    border: 1px solid var(--card-border);
-    margin-bottom: 20px;
-}
-
-.card-header {
-    background: var(--header-bg);
-    color: var(--header-text);
-    text-align: center;
-    font-weight: 600;
-    padding: 10px;
-}
-
-.form-label, label {
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-.form-control {
-    border-radius: 8px;
-    border: 1px solid var(--input-border);
-    padding: 8px;
-    color: var(--text-primary);
-    background: var(--input-bg);
-}
-
-.form-control:focus {
-    border-color: var(--input-focus);
-    box-shadow: 0 0 5px rgba(145, 200, 228, 0.5);
-    outline: none;
-}
-
-.btn-primary, .btn-danger {
-    font-size: 0.9rem;
-    padding: 5px 10px;
-    font-weight: 600;
-    border-radius: 6px;
-}
-
-.btn-primary {
-    background: var(--btn-bg);
-    border: none;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--btn-hover-bg);
-    transform: scale(1.02);
-}
-
-.btn-danger {
-    background: #dc3545;
-    border: none;
-    color: white;
-}
-
-.btn-danger:hover {
-    background: #c82333;
-    transform: scale(1.02);
-}
-
-.btn i {
-    font-size: 0.8rem;
-    margin-right: 4px;
-}
-
-.table thead {
-    background: var(--header-bg);
-    color: var(--header-text);
-}
-
-.table tbody tr:hover {
-    background: var(--table-row-hover);
-}
-
-.rounded-img {
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.btn-secondary-custom {
-    background: var(--text-primary);
-    color: white;
-    font-weight: 600;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.btn-secondary-custom:hover {
-    background: #315f85;
-    transform: scale(1.02);
-}
-</style>

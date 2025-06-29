@@ -1,0 +1,101 @@
+:root {
+    --editprod-bg: #F4EBD3;
+    --editprod-card-bg: #FFFBDE;
+    --editprod-shadow: rgba(116, 155, 194, 0.3);
+    --editprod-header-bg: linear-gradient(90deg, #4682A9, #749BC2);
+    --editprod-header-text: #fff;
+    --editprod-label: #555879;
+    --editprod-input-bg: #f0ead2;
+    --editprod-input-border: #98A1BC;
+    --editprod-input-focus: #4682A9;
+    --editprod-btn-primary-bg: linear-gradient(90deg, #4682A9, #749BC2);
+    --editprod-btn-primary-hover-bg: linear-gradient(90deg, #749BC2, #4682A9);
+    --editprod-btn-secondary-bg: #749BC2;
+    --editprod-btn-secondary-hover-bg: #4682A9;
+}
+
+.editprod-body {
+    background: var(--editprod-bg);
+    font-family: 'Segoe UI', sans-serif;
+    color: #34495e;
+    padding-top: 100px;
+    min-height: 100vh;
+}
+
+.editprod-card {
+    background: var(--editprod-card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px var(--editprod-shadow);
+    border: none;
+}
+
+.editprod-card-header {
+    background: var(--editprod-header-bg);
+    color: var(--editprod-header-text);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.8rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.editprod-label {
+    font-weight: 600;
+    color: var(--editprod-label);
+}
+
+.editprod-form-control {
+    border-radius: 8px;
+    border: 1px solid var(--editprod-input-border);
+    background: var(--editprod-input-bg);
+    color: #34495e;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+    width: 100%;
+}
+
+.editprod-form-control:focus {
+    border-color: var(--editprod-input-focus);
+    box-shadow: 0 0 6px rgba(70, 130, 169, 0.5);
+    background: #fff;
+    outline: none;
+}
+
+.editprod-btn {
+    min-width: 180px;
+    padding: 10px 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    text-align: center;
+    display: inline-block;
+}
+
+.editprod-btn-primary {
+    background: var(--editprod-btn-primary-bg);
+}
+
+.editprod-btn-primary:hover {
+    background: var(--editprod-btn-primary-hover-bg);
+    transform: scale(1.02);
+}
+
+.editprod-btn-secondary {
+    background: var(--editprod-btn-secondary-bg);
+}
+
+.editprod-btn-secondary:hover {
+    background: var(--editprod-btn-secondary-hover-bg);
+    transform: scale(1.02);
+}
+
+.editprod-img-preview {
+    border-radius: 8px;
+    max-width: 100px;
+    max-height: 100px;
+    margin-top: 10px;
+}

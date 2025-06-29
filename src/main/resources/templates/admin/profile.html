@@ -2,38 +2,42 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{admin/admin_base::layout(~{::section})}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Mi Perfil - Panel de Administración</title>
-</head>
+<th:block th:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/adm-profile.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</th:block>
 
-<body>
-<section>
+<section class="admprofile-body">
     <div class="container mt-5 mb-4">
 
+        <!-- Volver -->
         <div class="text-center mb-3">
-            <a href="/admin/" class="btn btn-custom">Volver al Panel</a>
+            <a href="/admin/" class="btn admprofile-btn">
+                <i class="fa-solid fa-arrow-left"></i> Volver al Panel
+            </a>
         </div>
 
         <!-- Mi Perfil -->
-        <div class="card p-4 mb-4">
+        <div class="admprofile-card p-4 mb-4">
             <h2 class="text-center mb-3">Mi Perfil</h2>
 
-            <th:block th:if="${session.succMsg}">
-                <p class="text-success text-center">[[${session.succMsg}]]</p>
+            <!-- Mensajes -->
+            <div th:if="${session.succMsg}" class="alert alert-success text-center fw-bold shadow-sm">
+                [[${session.succMsg}]]
                 <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-            </th:block>
-
-            <th:block th:if="${session.errorMsg}">
-                <p class="text-danger text-center">[[${session.errorMsg}]]</p>
+            </div>
+            <div th:if="${session.errorMsg}" class="alert alert-danger text-center fw-bold shadow-sm">
+                [[${session.errorMsg}]]
                 <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-            </th:block>
-
-            <div class="text-center mb-3">
-                <img th:src="@{'../img/profile_img/'+${user.profileImage}}" alt="Imagen de Perfil"
-                     class="img-profile">
             </div>
 
+            <!-- Foto de perfil -->
+            <div class="text-center mb-3">
+                <img th:src="@{'../img/profile_img/' + ${user.profileImage}}" alt="Imagen de Perfil"
+                     class="admprofile-img">
+            </div>
+
+            <!-- Formulario de perfil -->
             <form action="/admin/update-profile" method="post" enctype="multipart/form-data" class="mx-auto" style="max-width:600px;">
                 <div class="row g-3">
                     <div class="col-md-6">
@@ -80,13 +84,15 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <button class="btn btn-custom">Actualizar Perfil</button>
+                    <button class="btn admprofile-btn">
+                        <i class="fa-solid fa-floppy-disk"></i> Actualizar Perfil
+                    </button>
                 </div>
             </form>
         </div>
 
         <!-- Cambiar Contraseña -->
-        <div class="card p-4">
+        <div class="admprofile-card p-4">
             <h2 class="text-center mb-3">Cambiar Contraseña</h2>
 
             <form action="/admin/change-password" method="post" class="mx-auto" style="max-width:500px;">
@@ -103,93 +109,12 @@
                     <input type="password" name="confirmPassword" class="form-control">
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-custom">Actualizar Contraseña</button>
+                    <button class="btn admprofile-btn">
+                        <i class="fa-solid fa-key"></i> Actualizar Contraseña
+                    </button>
                 </div>
             </form>
         </div>
-
     </div>
 </section>
-</body>
 </html>
-
-<style>
-    body {
-        background: #F4EBD3;
-        font-family: 'Segoe UI', sans-serif;
-        color: #555879;
-    }
-
-    .card {
-        background: #FFFBDE;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(70, 130, 169, 0.15);
-        border: 1px solid #DED3C4;
-        transition: transform 0.2s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(70, 130, 169, 0.25);
-    }
-
-    .btn-custom {
-        background: linear-gradient(90deg, #4682A9, #749BC2);
-        color: #FFFBDE;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
-    }
-
-    .btn-custom:hover {
-        background: linear-gradient(90deg, #749BC2, #4682A9);
-        transform: scale(1.03);
-    }
-
-    .img-profile {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #749BC2;
-        transition: transform 0.2s, box-shadow 0.3s;
-    }
-
-    .img-profile:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(70, 130, 169, 0.3);
-    }
-
-    .form-control {
-        border-radius: 8px;
-        background: #f0ead2;
-        border: 1px solid #98A1BC;
-        color: #555879;
-        transition: border 0.3s, box-shadow 0.3s;
-    }
-
-    .form-control:focus {
-        border-color: #4682A9;
-        box-shadow: 0 0 6px rgba(70, 130, 169, 0.5);
-        background: #fff;
-        outline: none;
-    }
-
-    .text-success {
-        color: #4682A9 !important;
-        font-weight: 600;
-    }
-
-    .text-danger {
-        color: #A94442 !important;
-        font-weight: 600;
-    }
-
-    h2 {
-        color: #4682A9;
-        font-weight: 700;
-    }
-</style>

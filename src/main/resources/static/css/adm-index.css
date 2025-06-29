@@ -1,0 +1,149 @@
+:root {
+    --admindex-bg-gradient: linear-gradient(135deg, #f0f4fc, #ffffff);
+    --admindex-text-color: #333;
+    --admindex-title-color: #0d47a1;
+    --admindex-card-bg: #ffffff;
+    --admindex-shadow: rgba(0, 0, 0, 0.06);
+    --admindex-hover-shadow: rgba(0, 0, 0, 0.12);
+}
+
+.admindex-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    color: var(--admindex-text-color);
+    padding-top: 20px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+.admindex-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.admindex-title {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--admindex-title-color);
+}
+
+.admindex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+}
+
+.admindex-card-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    max-width: 200px;
+}
+
+.admindex-card {
+    background: var(--admindex-card-bg);
+    border-radius: 20px;
+    padding: 25px 15px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 18px var(--admindex-shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.admindex-card::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at top left, rgba(13, 71, 161, 0.07), transparent);
+    top: -25%;
+    left: -25%;
+    transform: rotate(15deg);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.admindex-card:hover::before {
+    opacity: 1;
+}
+
+.admindex-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 28px var(--admindex-hover-shadow);
+}
+
+.admindex-card i {
+    font-size: 2.7rem;
+    margin-bottom: 15px;
+    transition: transform 0.4s ease, color 0.4s ease, filter 0.4s ease;
+}
+
+.admindex-card:hover i {
+    transform: scale(1.12) rotate(-2deg);
+    filter: brightness(1.2);
+}
+
+/* Íconos de color */
+.admindex-card-link:nth-child(1) i { color: #0d47a1; }
+.admindex-card-link:nth-child(2) i { color: #2e7d32; }
+.admindex-card-link:nth-child(3) i { color: #f9a825; }
+.admindex-card-link:nth-child(4) i { color: #c62828; }
+.admindex-card-link:nth-child(5) i { color: #6a1b9a; }
+.admindex-card-link:nth-child(6) i { color: #00838f; }
+.admindex-card-link:nth-child(7) i { color: #ff6f00; }
+
+/* Hover con color más intenso */
+.admindex-card-link:nth-child(1):hover i { color: #1565c0; }
+.admindex-card-link:nth-child(2):hover i { color: #388e3c; }
+.admindex-card-link:nth-child(3):hover i { color: #fbc02d; }
+.admindex-card-link:nth-child(4):hover i { color: #d32f2f; }
+.admindex-card-link:nth-child(5):hover i { color: #8e24aa; }
+.admindex-card-link:nth-child(6):hover i { color: #0097a7; }
+.admindex-card-link:nth-child(7):hover i { color: #ff8f00; }
+
+.admindex-card h6 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.admindex-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: admindexFadeIn 0.8s forwards cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.admindex-fade-in:nth-child(1) { animation-delay: 0.1s; }
+.admindex-fade-in:nth-child(2) { animation-delay: 0.2s; }
+.admindex-fade-in:nth-child(3) { animation-delay: 0.3s; }
+.admindex-fade-in:nth-child(4) { animation-delay: 0.4s; }
+.admindex-fade-in:nth-child(5) { animation-delay: 0.5s; }
+.admindex-fade-in:nth-child(6) { animation-delay: 0.6s; }
+.admindex-fade-in:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes admindexFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 500px) {
+    .admindex-card {
+        height: auto;
+        padding: 20px 10px;
+    }
+}
