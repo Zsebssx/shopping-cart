@@ -10,33 +10,32 @@
 	<section>
 		<!-- Start Slider  -->
 
-		<div id="carouselExample"  class="carousel slide">
+	<div class="container-fluid p-0">
+		<!-- Carrusel editable -->
+		<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="img/ecom1.png" class="d-block w-100" alt="..."
-						height="350px">
+					<img src="/img/ecom1.png" class="d-block w-100" alt="Imagen 1" style="height: 450px; object-fit: cover;">
 				</div>
 				<div class="carousel-item">
-					<img src="img/ecom3.jpg" class="d-block w-100" alt="..."
-						height="350px">
+					<img src="/img/ecom3.jpg" class="d-block w-100" alt="Imagen 2" style="height: 450px; object-fit: cover;">
 				</div>
 				<div class="carousel-item">
-					<img src="img/ecom2.jpg" class="d-block w-100" alt="..."
-						height="350px">
+					<img src="/img/ecom2.jpg" class="d-block w-100" alt="Imagen 3" style="height: 450px; object-fit: cover;">
 				</div>
 			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExample" data-bs-slide="prev">
+
+			<!-- Botones de navegación -->
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
+				<span class="visually-hidden">Anterior</span>
 			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExample" data-bs-slide="next">
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
+				<span class="visually-hidden">Siguiente</span>
 			</button>
 		</div>
-
+	</div>
 		<!-- End Slider  -->
 
 		<!--< Start Category Module -->
@@ -167,6 +166,13 @@
 	</section>
 </body>
 </html>
+<style>
+		#carouselExample {
+			margin-top: 109px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+			overflow: hidden;
+		}
+</style>
 
 
 
