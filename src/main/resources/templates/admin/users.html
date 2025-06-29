@@ -1,67 +1,190 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	 th:replace="~{admin/admin_base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/admin_base::layout(~{::section})}">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Usuarios - Panel de Administración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
-	<section>
-		<div class="container-fluid mt-5 p-5">
+<section>
+    <div class="container-fluid mt-5 p-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/admin/" class="btn btn-secondary-custom">Volver</a>
+                    <p class="mb-0" th:if="${userType==1}">Usuarios</p>
+                    <p class="mb-0" th:if="${userType==2}">Administradores</p>
+                    <div></div> <!-- Espaciador -->
+                </div>
 
-			<div class="card card-sh">
-				<div class="card-header text-center">
-					<p class="fs-4" th:if="${userType==1}">Users</p>
-					<p class="fs-4" th:if="${userType==2}">Admin</p>
-					<th:block th:if="${session.succMsg}">
-						<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
+                <th:block th:if="${session.succMsg}">
+                    <p class="text-success mt-2">[[${session.succMsg}]]</p>
+                    <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
 
-					<th:block th:if="${session.errorMsg}">
-						<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
-				</div>
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sl No</th>
-								<th scope="col">Profile</th>
-								<th scope="col">Name</th>
-								<th scope="col">Email</th>
-								<th scope="col">Mobile No</th>
-								<th scope="col">Address</th>
-								<th scope="col">Status</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="u,c:${users}">
-								<th scope="row">[[${c.count}]]</th>
-								<td><img th:src="@{'/img/profile_img/'+${u.profileImage}}"
-									width="70px" height="70px"></td>
-								<td>[[${u.name}]]</td>
-								<td>[[${u.email}]]</td>
-								<td>[[${u.mobileNumber}]]</td>
-								<td>[[${u.address+','+u.city+','+u.state+','+u.pincode}]]</td>
-								<td>[[${u.isEnable}]]</td>
-								<td><a th:href="@{'/admin/updateSts?status=true&id='+${u.id}}+'&type='+${userType}"
-									class="btn btn-sm btn-primary">Active</a> 
-										
-									<a
-									th:href="@{'/admin/updateSts?status=false&id='+${u.id}}+'&type='+${userType}"
-									class="btn btn-sm btn-danger">
-										Inactive</a></td>
-							</tr>
+                <th:block th:if="${session.errorMsg}">
+                    <p class="text-danger mt-2">[[${session.errorMsg}]]</p>
+                    <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+            </div>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
-	</section>
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Perfil</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="u, c : ${users}">
+                            <td>[[${c.count}]]</td>
+                            <td>
+                                <img th:src="@{'/img/profile_img/' + ${u.profileImage}}" alt="Perfil"
+                                     class="img-thumbnail rounded-circle" width="70" height="70">
+                            </td>
+                            <td>[[${u.name}]]</td>
+                            <td>[[${u.email}]]</td>
+                            <td>[[${u.mobileNumber}]]</td>
+                            <td>[[${u.address + ', ' + u.city + ', ' + u.state + ', ' + u.pincode}]]</td>
+                            <td>
+                                <span th:text="${u.isEnable ? 'Activo' : 'Inactivo'}"></span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a th:href="@{'/admin/updateSts?status=true&id=' + ${u.id} + '&type=' + ${userType}}"
+                                       class="btn btn-sm btn-success">
+                                        ✓ Activar
+                                    </a>
+                                    <a th:href="@{'/admin/updateSts?status=false&id=' + ${u.id} + '&type=' + ${userType}}"
+                                       class="btn btn-sm btn-danger">
+                                        ✕ Desactivar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
+
+<style>
+    body {
+        background: #F4EBD3;
+        font-family: 'Segoe UI', sans-serif;
+        color: #555879;
+    }
+
+    .card {
+        background: #FFFBDE;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(116, 155, 194, 0.2);
+        border: 1px solid #DED3C4;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(116, 155, 194, 0.3);
+    }
+
+    .card-header {
+        background: linear-gradient(90deg, #91C8E4, #749BC2);
+        color: #FFFBDE;
+        font-weight: 600;
+        font-size: 1.3rem;
+        text-align: center;
+        padding: 0.8rem;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .table {
+        background: #FFFBDE;
+    }
+
+    .table thead {
+        background: #91C8E4;
+        color: #fff;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #DED3C4;
+        transition: background 0.3s;
+    }
+
+    .btn-success {
+        background: #4682A9;
+        border: none;
+        color: #FFFBDE;
+    }
+
+    .btn-success:hover {
+        background: #749BC2;
+        transform: scale(1.03);
+    }
+
+    .btn-danger {
+        background: #91C8E4;
+        border: none;
+        color: #555879;
+    }
+
+    .btn-danger:hover {
+        background: #749BC2;
+        color: #FFFBDE;
+        transform: scale(1.03);
+    }
+
+    .btn-secondary-custom {
+        background: #4682A9;
+        border: none;
+        color: #FFFBDE;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background 0.3s, transform 0.2s;
+        text-decoration: none;
+    }
+
+    .btn-secondary-custom:hover {
+        background: #749BC2;
+        transform: scale(1.03);
+    }
+
+    .img-thumbnail {
+        border-radius: 8px;
+        border: 1px solid #98A1BC;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .img-thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(116, 155, 194, 0.3);
+    }
+
+    .text-success {
+        color: #4682A9 !important;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: #A94442 !important;
+        font-weight: 600;
+    }
+</style>
