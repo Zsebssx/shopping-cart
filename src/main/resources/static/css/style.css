@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
+nav{
+	background-color: #4caf50;
+}
+
 .card-sh {
 	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
 }
