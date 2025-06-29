@@ -9,34 +9,46 @@
 <body>
 	<section>
 		<!-- Start Slider  -->
-
-	<div class="container-fluid p-0">
-		<!-- Carrusel editable -->
-		<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="/img/ecom1.png" class="d-block w-100" alt="Imagen 1" style="height: 450px; object-fit: cover;">
+	
+		<div id="backgroundd" class="container-fluid p-0">
+			<!-- Carrusel editable -->
+			<div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="/img/ecom1.png" class="d-block w-100" alt="Imagen 1" style="height: 450px; object-fit: cover;">
+					</div>
+					<div class="carousel-item">
+						<img src="/img/ecom3.jpg" class="d-block w-100" alt="Imagen 2" style="height: 450px; object-fit: cover;">
+					</div>
+					<div class="carousel-item">
+						<img src="/img/ecom2.jpg" class="d-block w-100" alt="Imagen 3" style="height: 450px; object-fit: cover;">
+					</div>
 				</div>
-				<div class="carousel-item">
-					<img src="/img/ecom3.jpg" class="d-block w-100" alt="Imagen 2" style="height: 450px; object-fit: cover;">
-				</div>
-				<div class="carousel-item">
-					<img src="/img/ecom2.jpg" class="d-block w-100" alt="Imagen 3" style="height: 450px; object-fit: cover;">
-				</div>
+	
+				<!-- Botones de navegación -->
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Anterior</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Siguiente</span>
+				</button>
 			</div>
-
-			<!-- Botones de navegación -->
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Anterior</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Siguiente</span>
-			</button>
 		</div>
-	</div>
 		<!-- End Slider  -->
+		
+		<div class="Lema">
+			<div class="mensajes">
+				
+			</div>
+			<div> <img alt="imagen-sector" src="../static/img/movildrea.png"> </div>
+		</div>
+		
+		
+		
+		
+		
 
 		<!--< Start Category Module -->
 		<div class="container">
@@ -167,11 +179,17 @@
 </body>
 </html>
 <style>
+		#backgroundd{
+			background-color: #2E7D32;
+		}
 		#carouselExample {
 			margin-top: 109px;
 			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 			overflow: hidden;
+			border-bottom-left-radius: 50px;
+			border-bottom-right-radius:50px; 
 		}
+		
 </style>
 
 
