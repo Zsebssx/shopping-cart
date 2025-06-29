@@ -1,0 +1,123 @@
+:root {
+    --prod-bg-page: rgb(238, 239, 224);
+    --prod-card-bg: rgb(245, 236, 224);
+    --prod-card-shadow: rgba(51, 109, 130, 0.15);
+    --prod-text-primary: rgb(51, 109, 130);
+    --prod-text-secondary: rgb(95, 153, 174);
+    --prod-input-bg: rgb(209, 216, 190);
+    --prod-input-border: rgb(167, 193, 168);
+    --prod-btn-bg: rgb(51, 109, 130);
+    --prod-btn-hover: rgb(95, 153, 174);
+    --prod-accent: rgb(129, 154, 145);
+}
+
+.prod-body {
+    margin: 0;
+    padding-top: 80px;
+    background: var(--prod-bg-page);
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--prod-text-primary);
+    min-height: 100vh;
+}
+
+.prod-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.prod-card {
+    background: var(--prod-card-bg);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px var(--prod-card-shadow);
+    border: none;
+    overflow: hidden;
+}
+
+.prod-card-header {
+    background: transparent;
+    border-bottom: none;
+    text-align: center;
+}
+
+.prod-form-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--prod-btn-bg);
+    background: linear-gradient(90deg, #4682A9, #749BC2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(116, 155, 194, 0.5);
+}
+
+.prod-form-label {
+    font-weight: 600;
+    color: var(--prod-text-secondary);
+    margin-bottom: 2px;
+    display: block;
+    text-align: left;
+}
+
+.prod-form-control {
+    background: var(--prod-input-bg);
+    border: 1px solid var(--prod-input-border);
+    border-radius: 8px;
+    color: var(--prod-text-primary);
+    padding: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.prod-form-control:focus {
+    border-color: var(--prod-btn-bg);
+    box-shadow: 0 0 6px rgba(51, 109, 130, 0.3);
+    outline: none;
+}
+
+.prod-form-control-sm {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+}
+
+.prod-btn-custom,
+.prod-btn-secondary-custom {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.prod-btn-custom {
+    background: var(--prod-btn-bg);
+}
+
+.prod-btn-custom:hover {
+    background: var(--prod-btn-hover);
+    transform: scale(1.02);
+}
+
+.prod-btn-secondary-custom {
+    background: var(--prod-accent);
+    margin-top: 15px;
+}
+
+.prod-btn-secondary-custom:hover {
+    background: rgb(110, 140, 130);
+    transform: scale(1.02);
+}
+
+.prod-text-success, .prod-text-danger {
+    font-size: 0.95rem;
+    font-weight: 600;
+}

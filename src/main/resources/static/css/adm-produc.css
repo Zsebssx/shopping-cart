@@ -1,0 +1,104 @@
+:root {
+    --admproducts-bg: #FFFBDE;
+    --admproducts-card-bg: #DED3C4;
+    --admproducts-table-bg: #F4EBD3;
+    --admproducts-primary: #749BC2;
+    --admproducts-primary-hover: #91C8E4;
+    --admproducts-secondary: #4682A9;
+    --admproducts-text: #555879;
+}
+
+.admproducts-body {
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--admproducts-text);
+    padding-top: 60px;
+}
+
+.admproducts-card {
+    background: var(--admproducts-card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+}
+
+.admproducts-title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--admproducts-secondary);
+    margin-bottom: 20px;
+}
+
+.admproducts-btn,
+.admproducts-btn-sm,
+.admproducts-btn-sm-danger {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admproducts-btn {
+    background: var(--admproducts-primary);
+}
+
+.admproducts-btn:hover {
+    background: var(--admproducts-primary-hover);
+    transform: scale(1.04);
+}
+
+.admproducts-btn-sm {
+    background: var(--admproducts-primary);
+}
+
+.admproducts-btn-sm:hover {
+    background: var(--admproducts-primary-hover);
+    transform: scale(1.05);
+}
+
+.admproducts-btn-sm-danger {
+    background: #c0392b;
+}
+
+.admproducts-btn-sm-danger:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+}
+
+.admproducts-table {
+    background: var(--admproducts-table-bg);
+}
+
+.admproducts-table th,
+.admproducts-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.admproducts-thead {
+    background: var(--admproducts-primary);
+    color: #fff;
+}
+
+.admproducts-pagination .page-link {
+    color: var(--admproducts-primary);
+}
+
+.admproducts-pagination .page-item.active .page-link {
+    background: var(--admproducts-primary);
+    color: #fff;
+    border: none;
+}
+
+.admproducts-pagination .page-link:hover {
+    background: var(--admproducts-primary-hover);
+    color: #fff;
+}

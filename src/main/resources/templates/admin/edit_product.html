@@ -2,20 +2,18 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{admin/admin_base::layout(~{::section})}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Producto - Panel</title>
+<th:block th:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/adm-edit_produc.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
+</th:block>
 
-<body>
-<section>
+<section class="editprod-body">
     <div class="container p-4 mt-3">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <p class="fs-4 mb-0">Editar Producto</p>
+                <div class="editprod-card">
+                    <div class="editprod-card-header">
+                        Editar Producto
 
                         <th:block th:if="${session.succMsg}">
                             <p class="text-success fw-bold mt-2">[[${session.succMsg}]]</p>
@@ -32,42 +30,42 @@
                             <input type="hidden" name="id" th:value="${product.id}">
 
                             <div class="mb-3">
-                                <label class="form-label">Título</label>
-                                <input type="text" name="title" th:value="${product.title}" class="form-control" required>
+                                <label class="editprod-label">Título</label>
+                                <input type="text" name="title" th:value="${product.title}" class="editprod-form-control" required>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Descripción</label>
-                                <textarea rows="3" name="description" class="form-control" required>[[${product.description}]]</textarea>
+                                <label class="editprod-label">Descripción</label>
+                                <textarea rows="3" name="description" class="editprod-form-control" required>[[${product.description}]]</textarea>
                             </div>
 
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Categoría</label>
-                                    <select class="form-control" name="category" required>
+                                    <label class="editprod-label">Categoría</label>
+                                    <select class="editprod-form-control" name="category" required>
                                         <option selected>[[${product.category}]]</option>
                                         <option th:each="c:${categories}">[[${c.name}]]</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Precio</label>
-                                    <input type="number" name="price" th:value="${product.price}" step="0.01" class="form-control" required>
+                                    <label class="editprod-label">Precio</label>
+                                    <input type="number" name="price" th:value="${product.price}" step="0.01" class="editprod-form-control" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Descuento (%)</label>
-                                    <input type="number" name="discount" th:value="${product.discount}" class="form-control">
+                                    <label class="editprod-label">Descuento (%)</label>
+                                    <input type="number" name="discount" th:value="${product.discount}" class="editprod-form-control">
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Precio con Descuento</label>
-                                    <input type="number" readonly th:value="${product.discountPrice}" class="form-control">
+                                    <label class="editprod-label">Precio con Descuento</label>
+                                    <input type="number" readonly th:value="${product.discountPrice}" class="editprod-form-control">
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Estado</label>
+                                <label class="editprod-label">Estado</label>
                                 <div class="d-flex gap-4 mt-1">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" th:checked="${product.isActive==true}" value="true" name="isActive" id="activo">
@@ -82,13 +80,13 @@
 
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Stock</label>
-                                    <input type="number" name="stock" th:value="${product.stock}" class="form-control" required>
+                                    <label class="editprod-label">Stock</label>
+                                    <input type="number" name="stock" th:value="${product.stock}" class="editprod-form-control" required>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Imagen</label>
-                                    <input type="file" name="file" class="form-control">
-                                    <img th:src="@{'/img/product_img/'+${product.image}}" alt="Imagen del producto" class="img-thumbnail mt-2" width="100">
+                                    <label class="editprod-label">Imagen</label>
+                                    <input type="file" name="file" class="editprod-form-control">
+                                    <img th:src="@{'/img/product_img/'+${product.image}}" alt="Imagen del producto" class="editprod-img-preview">
                                 </div>
                             </div>
                         </form>
@@ -98,97 +96,14 @@
         </div>
     </div>
 
-    <!-- Botones fuera del container -->
+    <!-- Botones -->
     <div class="d-flex justify-content-center gap-3 mt-4 mb-4 flex-wrap">
-        <button type="button" class="btn btn-custom" onclick="document.getElementById('editProductForm').submit();">
+        <button type="button" class="editprod-btn editprod-btn-primary" onclick="document.getElementById('editProductForm').submit();">
             <i class="fa-solid fa-floppy-disk"></i> Actualizar
         </button>
-        <a href="/admin/products" class="btn btn-secondary-custom">
+        <a href="/admin/products" class="editprod-btn editprod-btn-secondary">
             <i class="fa-solid fa-arrow-left"></i> Volver
         </a>
     </div>
 </section>
-</body>
 </html>
-
-<style>
-body {
-    background: #F4EBD3;
-    font-family: 'Segoe UI', sans-serif;
-    color: #34495e;
-}
-
-.card {
-    background: #FFFBDE;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(116, 155, 194, 0.3);
-    border: none;
-}
-
-.card-header {
-    background: linear-gradient(90deg, #4682A9, #749BC2);
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 0.8rem;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-}
-
-.form-label {
-    font-weight: 600;
-    color: #555879;
-}
-
-.form-control {
-    border-radius: 8px;
-    border: 1px solid #98A1BC;
-    background: #f0ead2;
-    color: #34495e;
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-.form-control:focus {
-    border-color: #4682A9;
-    box-shadow: 0 0 6px rgba(70, 130, 169, 0.5);
-    background: #fff;
-    outline: none;
-}
-
-.btn-custom,
-.btn-secondary-custom {
-    min-width: 180px;
-    padding: 10px 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
-    text-align: center;
-}
-
-.btn-custom {
-    background: linear-gradient(90deg, #4682A9, #749BC2);
-}
-
-.btn-custom:hover {
-    background: linear-gradient(90deg, #749BC2, #4682A9);
-    transform: scale(1.02);
-}
-
-.btn-secondary-custom {
-    background: #749BC2;
-}
-
-.btn-secondary-custom:hover {
-    background: #4682A9;
-    transform: scale(1.02);
-}
-
-.img-thumbnail {
-    border-radius: 8px;
-}
-</style>

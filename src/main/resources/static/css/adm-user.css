@@ -1,0 +1,99 @@
+:root {
+    --users-bg: #F4EBD3;
+    --users-card: #FFFBDE;
+    --users-primary: #4682A9;
+    --users-secondary: #749BC2;
+    --users-hover: #91C8E4;
+    --users-text: #555879;
+}
+
+.admusers-body {
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--users-text);
+}
+
+.admusers-card {
+    background: var(--users-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(116, 155, 194, 0.2);
+    border: 1px solid #DED3C4;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.admusers-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 155, 194, 0.3);
+}
+
+.admusers-header {
+    background: linear-gradient(90deg, var(--users-hover), var(--users-secondary));
+    color: #FFFBDE;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.admusers-btn {
+    background: var(--users-primary);
+    color: #FFFBDE;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.admusers-btn:hover {
+    background: var(--users-secondary);
+    transform: scale(1.03);
+}
+
+.admusers-thead {
+    background: var(--users-hover);
+    color: #fff;
+}
+
+.admusers-img {
+    border-radius: 8px;
+    border: 2px solid #98A1BC;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.admusers-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(116, 155, 194, 0.3);
+}
+
+.admusers-btn-success {
+    background: var(--users-primary);
+    color: #FFFBDE;
+    border: none;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.admusers-btn-success:hover {
+    background: var(--users-secondary);
+    transform: scale(1.03);
+}
+
+.admusers-btn-danger {
+    background: var(--users-hover);
+    color: #555879;
+    border: none;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.admusers-btn-danger:hover {
+    background: var(--users-secondary);
+    color: #FFFBDE;
+    transform: scale(1.03);
+}
+
+.alert-success {
+    color: var(--users-primary);
+    font-weight: 600;
+}
+
+.alert-danger {
+    color: #A94442;
+    font-weight: 600;
+}
