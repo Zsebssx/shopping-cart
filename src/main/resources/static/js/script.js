@@ -19,8 +19,8 @@ $userRegister.validate({
             required: true,
             space: true,
             numericOnly: true,
-            minlength: 10,
-            maxlength: 12
+            minlength: 9,
+            maxlength: 9
         },
         password: {
             required: true,
@@ -65,8 +65,8 @@ $userRegister.validate({
             required: 'El número de celular es obligatorio',
             space: 'No se permiten espacios',
             numericOnly: 'Número inválido',
-            minlength: 'Mínimo 10 dígitos',
-            maxlength: 'Máximo 12 dígitos'
+            minlength: 'Debe tener 9 dígitos',
+            maxlength: 'Debe tener 9 dígitos'
         },
         password: {
             required: 'La contraseña es obligatoria',
