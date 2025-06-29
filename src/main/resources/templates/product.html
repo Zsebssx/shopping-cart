@@ -48,7 +48,7 @@
 				<div class="col-md-10">
 					<div class="card">
 						<div class="card-body">
-							<p class="fs-3 text-center">Products</p>
+							<p class="fs-3 text-center">Productos</p>
 							<div class="row">
 
 								<th:block th:if="${productsSize >0}">
@@ -66,16 +66,14 @@
 															off </span>
 													</p>
 													<a th:href="@{'/product/'+${p.id}}"
-														class="btn btn-primary col-md-6 offset-md-3">View
-														Details</a>
+														class="btn btn-primary col-md-6 offset-md-3">Ver detalles</a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</th:block>
 								<th:block th:unless="${productsSize>0}">
-									<p class="fs-4 text-center mt-4 text-danger">Product not
-										available</p>
+									<p class="fs-4 text-center mt-4 text-danger">Producto no disponible</p>
 								</th:block>
 							</div>
 
@@ -83,7 +81,7 @@
 					</div>
 					<!-- Start Pagination -->
 					<div class="row">
-						<div class="col-md-4">Total Products : [[${totalElements}]]</div>
+						<div class="col-md-4">Total de Productos : [[${totalElements}]]</div>
 						<div class="col-md-6">
 							<th:block th:if="${productsSize>0}">
 								<nav aria-label="Page navigation example">
