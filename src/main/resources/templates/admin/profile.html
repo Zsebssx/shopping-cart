@@ -1,162 +1,195 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	 th:replace="~{admin/admin_base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/admin_base::layout(~{::section})}">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Mi Perfil - Panel de Administración</title>
 </head>
+
 <body>
-	<section>
-		<div class="container-fluid mt-5 p-5 bg-light">
-			<div class="row">
-				<div class="col-md-10 offset-md-1 ">
+<section>
+    <div class="container mt-5 mb-4">
 
-					<p class="fs-3 text-center">My Profile</p>
-					<th:block th:if="${session.succMsg}">
-						<p class="text-success fw-bold  text-center">[[${session.succMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
+        <div class="text-center mb-3">
+            <a href="/admin/" class="btn btn-custom">Volver al Panel</a>
+        </div>
 
-					<th:block th:if="${session.errorMsg}">
-						<p class="text-danger fw-bold  text-center">[[${session.errorMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
-					<hr>
-					<div class="text-center">
-						<img alt="" th:src="@{'../img/profile_img/'+${user.profileImage}}"
-							class="border p-2"
-							style="width: 110px; height: 110px; border-radius: 50%;">
-					</div>
-					<div class="col-md-8 offset-md-2 mt-4">
-						<table class="table table-borderless">
+        <!-- Mi Perfil -->
+        <div class="card p-4 mb-4">
+            <h2 class="text-center mb-3">Mi Perfil</h2>
 
-							<tbody>
-								<form action="/admin/update-profile" method="post"
-									enctype="multipart/form-data">
-								<tr>
-									<th scope="row">Name</th>
-									<td>:</td>
-									<td><input type="text" name="name" class="form-control"
-										th:value="${user.name}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Mobile Number</th>
-									<td>:</td>
-									<td><input type="text" name="mobileNumber"
-										class="form-control" th:value="${user.mobileNumber}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Email</th>
-									<td>:</td>
-									<td><input type="text" name="" class="form-control"
-										readonly th:value="${user.email}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Address</th>
-									<td>:</td>
-									<td><input type="text" name="address" class="form-control"
-										th:value="${user.address}"></td>
-								</tr>
-								<tr>
-									<th scope="row">City</th>
-									<td>:</td>
-									<td><input type="text" name="city" class="form-control"
-										th:value="${user.city}"></td>
-								</tr>
-								<tr>
-									<th scope="row">State</th>
-									<td>:</td>
-									<td><input type="text" name="state" class="form-control"
-										th:value="${user.state}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Pincode</th>
-									<td>:</td>
-									<td><input type="text" name="pincode" class="form-control"
-										th:value="${user.pincode}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Image</th>
-									<td>:</td>
-									<td><input type="file" name="img" class="form-control"
-										value=""></td>
-								</tr>
-								<tr>
-									<th scope="row">Role</th>
-									<td>:</td>
-									<td><input type="text" name="" class="form-control"
-										readonly th:value="${user.role}"></td>
-								</tr>
-								<tr>
-									<th scope="row">Account Status</th>
-									<td>:</td>
-									<td><input type="text" name="" class="form-control"
-										readonly th:value="${user.isEnable}"> <input
-										type="hidden" th:value="${user.id}" name="id"></td>
-								</tr>
+            <th:block th:if="${session.succMsg}">
+                <p class="text-success text-center">[[${session.succMsg}]]</p>
+                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
 
-								<tr>
-									<td></td>
-									<td class="text-center">
-										<button class="btn btn-sm bg-primary text-light">Update</button>
-									</td>
-								</tr>
-								</form>
-							</tbody>
-						</table>
+            <th:block th:if="${session.errorMsg}">
+                <p class="text-danger text-center">[[${session.errorMsg}]]</p>
+                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+            </th:block>
 
-					</div>
+            <div class="text-center mb-3">
+                <img th:src="@{'../img/profile_img/'+${user.profileImage}}" alt="Imagen de Perfil"
+                     class="img-profile">
+            </div>
 
-				</div>
-				<hr>
-				<div class="col-md-10 offset-md-1 mt-1">
-					<div class="row">
-						<p class="text-center fs-3">Change Password</p>
-						<div class="col-md-6 offset-md-3">
-							<table class="table table-borderless">
+            <form action="/admin/update-profile" method="post" enctype="multipart/form-data" class="mx-auto" style="max-width:600px;">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="name" class="form-control" th:value="${user.name}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Teléfono</label>
+                        <input type="text" name="mobileNumber" class="form-control" th:value="${user.mobileNumber}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Correo</label>
+                        <input type="text" class="form-control" readonly th:value="${user.email}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" name="address" class="form-control" th:value="${user.address}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Ciudad</label>
+                        <input type="text" name="city" class="form-control" th:value="${user.city}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Estado</label>
+                        <input type="text" name="state" class="form-control" th:value="${user.state}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Código Postal</label>
+                        <input type="text" name="pincode" class="form-control" th:value="${user.pincode}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Imagen</label>
+                        <input type="file" name="img" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Rol</label>
+                        <input type="text" class="form-control" readonly th:value="${user.role}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Estado de Cuenta</label>
+                        <input type="text" class="form-control" readonly th:value="${user.isEnable}">
+                        <input type="hidden" th:value="${user.id}" name="id">
+                    </div>
+                </div>
 
-								<tbody>
-									<form action="/admin/change-password" method="post">
-										<tr>
-											<th scope="row">Current Password</th>
+                <div class="text-center mt-4">
+                    <button class="btn btn-custom">Actualizar Perfil</button>
+                </div>
+            </form>
+        </div>
 
-											<td><input type="password" name="currentPassword" class="form-control"></td>
-										</tr>
+        <!-- Cambiar Contraseña -->
+        <div class="card p-4">
+            <h2 class="text-center mb-3">Cambiar Contraseña</h2>
 
-										<tr>
-											<th scope="row">New Password</th>
+            <form action="/admin/change-password" method="post" class="mx-auto" style="max-width:500px;">
+                <div class="mb-3">
+                    <label class="form-label">Contraseña Actual</label>
+                    <input type="password" name="currentPassword" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nueva Contraseña</label>
+                    <input type="password" name="newPassword" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Confirmar Contraseña</label>
+                    <input type="password" name="confirmPassword" class="form-control">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-custom">Actualizar Contraseña</button>
+                </div>
+            </form>
+        </div>
 
-											<td><input type="password" name="newPassword" class="form-control"></td>
-										</tr>
-
-										<tr>
-											<th scope="row">Confirm Password</th>
-
-											<td><input type="password" name="confirmPassword" class="form-control"></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td class="text-center">
-												<button class="btn btn-sm bg-primary text-light col-md-4">Update</button>
-											</td>
-
-										</tr>
-									</form>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</div>
-
-
-
-
-
-
-	</section>
+    </div>
+</section>
 </body>
 </html>
+
+<style>
+    body {
+        background: #F4EBD3;
+        font-family: 'Segoe UI', sans-serif;
+        color: #555879;
+    }
+
+    .card {
+        background: #FFFBDE;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(70, 130, 169, 0.15);
+        border: 1px solid #DED3C4;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(70, 130, 169, 0.25);
+    }
+
+    .btn-custom {
+        background: linear-gradient(90deg, #4682A9, #749BC2);
+        color: #FFFBDE;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-custom:hover {
+        background: linear-gradient(90deg, #749BC2, #4682A9);
+        transform: scale(1.03);
+    }
+
+    .img-profile {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #749BC2;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .img-profile:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(70, 130, 169, 0.3);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        background: #f0ead2;
+        border: 1px solid #98A1BC;
+        color: #555879;
+        transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #4682A9;
+        box-shadow: 0 0 6px rgba(70, 130, 169, 0.5);
+        background: #fff;
+        outline: none;
+    }
+
+    .text-success {
+        color: #4682A9 !important;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: #A94442 !important;
+        font-weight: 600;
+    }
+
+    h2 {
+        color: #4682A9;
+        font-weight: 700;
+    }
+</style>

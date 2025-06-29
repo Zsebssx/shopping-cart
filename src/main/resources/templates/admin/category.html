@@ -1,14 +1,151 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{admin/admin_base::layout(~{::section})}">
+
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Administrar Categor�as</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+   <meta charset="UTF-8">
+   <title>Administrar Categorías</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 <section>
+
+<div class="container-fluid p-5 mt-4">
+    <div class="row">
+        <!-- Formulario Agregar Categoría -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <p class="fs-6 mb-0">Agregar Categoría</p>
+                </div>
+                <div class="card-body">
+                    <th:block th:if="${session.succMsg}">
+                        <p class="text-success fw-bold text-center">[[${session.succMsg}]]</p>
+                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+                    <th:block th:if="${session.errorMsg}">
+                        <p class="text-danger fw-bold text-center">[[${session.errorMsg}]]</p>
+                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+
+                    <form action="/admin/saveCategory" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label>Nombre de la Categoría</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-3">
+                                <label>Estado</label>
+                            </div>
+                            <div class="col-md-9 d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" checked value="true" name="isActive" id="activo">
+                                    <label class="form-check-label" for="activo">Activo</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="isActive" value="false" id="inactivo">
+                                    <label class="form-check-label" for="inactivo">Inactivo</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Subir Imagen</label>
+                            <input type="file" name="file" class="form-control">
+                        </div>
+
+                        <button class="btn btn-primary w-100 mt-2" type="submit">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Categorías -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <p class="fs-6 mb-0">Detalle de Categorías</p>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Categoría</th>
+                            <th>Estado</th>
+                            <th>Imagen</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cat,c:${categorys}">
+                            <td>[[${c.count}]]</td>
+                            <td>[[${cat.name}]]</td>
+                            <td>
+                                <span th:text="${cat.isActive} ? 'Activo' : 'Inactivo'"></span>
+                            </td>
+                            <td>
+                                <img th:src="@{'/img/category_img/'+${cat.imageName}}" width="50" height="50" class="rounded-img">
+                            </td>
+                            <td>
+                                <a th:href="@{'/admin/loadEditCategory/'+${cat.id}}" class="btn btn-primary btn-sm mb-1">
+                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                </a>
+                                <a th:href="@{'/admin/deleteCategory/'+${cat.id}}" class="btn btn-danger btn-sm mb-1">
+                                    <i class="fa-solid fa-trash"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Paginación -->
+                    <div class="row">
+                        <div class="col-md-4">Total Categorías: [[${totalElements}]]</div>
+                        <div class="col-md-8">
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${isFirst} ? 'disabled'">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo-1}}" aria-label="Anterior">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+                                        th:classappend="${pageNo+1 == i} ? 'active'">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${isLast} ? 'disabled'">
+                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo+1}}" aria-label="Siguiente">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Botón Volver -->
+<div class="text-center mt-3">
+    <a href="/admin/" class="btn btn-secondary-custom">
+        <i class="fa-solid fa-arrow-left"></i> Volver al Panel
+    </a>
+</div>
+
+</section>
+</body>
+</html>
+
 <style>
 :root {
     --bg-page: #FFFBDE;
@@ -116,129 +253,21 @@ body {
     border-radius: 8px;
     object-fit: cover;
 }
+
+.btn-secondary-custom {
+    background: var(--text-primary);
+    color: white;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-secondary-custom:hover {
+    background: #315f85;
+    transform: scale(1.02);
+}
 </style>
-
-<div class="container-fluid p-5 mt-4">
-    <div class="row">
-        <!-- Formulario Agregar Categor�a -->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <p class="fs-6 mb-0">Agregar Categoria</p>
-                </div>
-                <div class="card-body">
-                    <th:block th:if="${session.succMsg}">
-                        <p class="text-success fw-bold text-center">[[${session.succMsg}]]</p>
-                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-                    </th:block>
-                    <th:block th:if="${session.errorMsg}">
-                        <p class="text-danger fw-bold text-center">[[${session.errorMsg}]]</p>
-                        <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-                    </th:block>
-
-                    <form action="/admin/saveCategory" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label>Nombre de la Categoria</label>
-                            <input type="text" name="name" class="form-control" required>
-                        </div>
-
-                        <div class="row mb-3 align-items-center">
-				    <div class="col-md-3">
-				        <label>Estado</label>
-				    </div>
-				    <div class="col-md-9 d-flex gap-3">
-				        <div class="form-check">
-				            <input class="form-check-input" type="radio" checked value="true" name="isActive" id="activo">
-				            <label class="form-check-label" for="activo">Activo</label>
-				        </div>
-				        <div class="form-check">
-				            <input class="form-check-input" type="radio" name="isActive" value="false" id="inactivo">
-				            <label class="form-check-label" for="inactivo">Inactivo</label>
-				        </div>
-				    </div>
-				</div>
-                        <div class="mb-3">
-                            <label>Subir Imagen</label>
-                            <input type="file" name="file" class="form-control">
-                        </div>
-                        <button class="btn btn-primary w-100 mt-2" type="submit">
-                            <i class="fa-solid fa-floppy-disk"></i> Guardar
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tabla de Categor�as -->
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <p class="fs-6 mb-0"> Detalle de Categorias</p>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Categoria</th>
-                            <th>Estado</th>
-                            <th>Imagen</th>
-                            <th>Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cat,c:${categorys}">
-                            <td>[[${c.count}]]</td>
-                            <td>[[${cat.name}]]</td>
-                            <td>
-                                <span th:text="${cat.isActive} ? 'Activo' : 'Inactivo'"></span>
-                            </td>
-                            <td>
-                                <img th:src="@{'/img/category_img/'+${cat.imageName}}" width="50" height="50" class="rounded-img">
-                            </td>
-                            <td>
-                                <a th:href="@{'/admin/loadEditCategory/'+${cat.id}}" class="btn btn-primary btn-sm mb-1">
-                                    Editar
-                                </a>
-                                <a th:href="@{'/admin/deleteCategory/'+${cat.id}}" class="btn btn-danger btn-sm mb-1">
-                                    Eliminar
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Paginaci�n -->
-                    <div class="row">
-                        <div class="col-md-4">Total Categorias: [[${totalElements}]]</div>
-                        <div class="col-md-8">
-                            <nav>
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item" th:classappend="${isFirst} ? 'disabled'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo-1}}" aria-label="Anterior">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
-                                        th:classappend="${pageNo+1 == i} ? 'active'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${i-1}}">[[${i}]]</a>
-                                    </li>
-                                    <li class="page-item" th:classappend="${isLast} ? 'disabled'">
-                                        <a class="page-link" th:href="@{'/admin/category?pageNo='+${pageNo+1}}" aria-label="Siguiente">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-</section>
-</body>
-</html>

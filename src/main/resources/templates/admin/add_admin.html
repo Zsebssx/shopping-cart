@@ -1,18 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{admin/admin_base::layout(~{::section})}">
 
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Add Admin - Panel</title>
+    <meta charset="UTF-8">
+    <title>Agregar Administrador - Panel</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 <section>
+
+<div class="container">
+    <form action="/admin/save-admin" enctype="multipart/form-data" method="post">
+        <h2 class="form-title">Agregar Administrador</h2>
+
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Nombre completo</label>
+                <input required class="form-control" name="name" type="text">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Número de teléfono</label>
+                <input required class="form-control" name="mobileNumber" type="number">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input required class="form-control" name="email" type="email">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Dirección</label>
+                <input required class="form-control" name="address" type="text">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Ciudad</label>
+                <input required class="form-control" name="city" type="text">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Distrito</label>
+                <input required class="form-control" name="state" type="text">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Código postal</label>
+                <input required class="form-control" name="pincode" type="number">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Contraseña</label>
+                <input required class="form-control" name="password" type="password">
+            </div>
+            <div class="col-md-6 mb-2">
+                <label class="form-label">Confirmar contraseña</label>
+                <input required class="form-control" name="cpassword" type="password">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Imagen de perfil</label>
+            <input class="form-control" name="img" type="file">
+        </div>
+
+        <button type="submit" class="btn btn-custom mt-3">
+            <i class="fa-solid fa-floppy-disk"></i> Registrar
+        </button>
+    </form>
+</div>
+
+<!-- Botón volver fuera del container -->
+<div class="text-center mt-3">
+    <a href="/admin/" class="btn btn-secondary-custom">
+        <i class="fa-solid fa-arrow-left"></i> Volver al Panel
+    </a>
+</div>
+
+</section>
+</body>
+</html>
+
 <style>
-  :root {
+:root {
     --bg-page: rgb(238, 239, 224);
     --card-bg: rgb(245, 236, 224);
     --card-shadow: rgba(51, 109, 130, 0.15);
@@ -23,119 +99,93 @@
     --btn-bg: rgb(51, 109, 130);
     --btn-hover: rgb(95, 153, 174);
     --accent: rgb(129, 154, 145);
-  }
+}
 
-  body {
+body {
     margin: 0;
     padding-top: 80px;
     background: var(--bg-page);
     font-family: 'Segoe UI', sans-serif;
     color: var(--text-primary);
     min-height: 100vh;
-  }
+}
 
-  .container {
-    max-width: 500px;
+.container {
+    max-width: 600px;
     margin: 50px auto;
     padding: 25px;
     background: var(--card-bg);
     border-radius: 16px;
     box-shadow: 0 8px 20px var(--card-shadow);
-  }
+}
 
-  .form-label {
-    font-weight: 600;
-    color: var(--text-secondary);
-  }
-
-  .form-control {
+.form-control {
     background: var(--input-bg);
     border: 1px solid var(--input-border);
     border-radius: 10px;
     color: var(--text-primary);
-    padding: 10px;
+    padding: 12px;
     transition: border-color 0.3s, box-shadow 0.3s;
-  }
+    width: 100%;
+    font-size: 1rem;
+}
 
-  .form-control:focus {
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--btn-bg);
+    background: linear-gradient(90deg, #4682A9, #749BC2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(116, 155, 194, 0.6);
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-control:focus {
     border-color: var(--btn-bg);
     box-shadow: 0 0 6px rgba(51, 109, 130, 0.3);
     outline: none;
-  }
+}
 
-  .btn-custom {
-    background: var(--btn-bg);
-    color: #fff;
+.btn-custom,
+.btn-secondary-custom {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 0.95rem;
     font-weight: 600;
     border: none;
     border-radius: 10px;
-    padding: 12px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
-    width: 100%;
-  }
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
 
-  .btn-custom:hover {
+.btn-custom {
+    background: var(--btn-bg);
+}
+
+.btn-custom:hover {
     background: var(--btn-hover);
     transform: scale(1.02);
-  }
-</style>
+}
 
-<div class="container">
-    <form action="/admin/save-admin" enctype="multipart/form-data" method="post">
-        <div class="row mb-3">
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Nombre Completo</label>
-                <input required class="form-control" name="name" type="text">
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Numero de Telefono</label>
-                <input required class="form-control" name="mobileNumber" type="number">
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Correo Electronico</label>
-            <input required class="form-control" name="email" type="email">
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Direccion</label>
-                <input required class="form-control" name="address" type="text">
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Ciudad</label>
-                <input required class="form-control" name="city" type="text">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Departamento / Estado</label>
-                <input required class="form-control" name="state" type="text">
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Codigo Postal</label>
-                <input required class="form-control" name="pincode" type="number">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Password</label>
-                <input required class="form-control" name="password" type="password">
-            </div>
-            <div class="col-md-6 mb-2">
-                <label class="form-label">Password</label>
-                <input required class="form-control" name="cpassword" type="password">
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Imagen de Perfil</label>
-            <input class="form-control" name="img" type="file">
-        </div>
-        <button type="submit" class="btn btn-custom mt-2">
-            <i class="fa-solid fa-user-plus"></i> Registrar
-        </button>
-    </form>
-</div>
-</section>
-</body>
-</html>
+.btn-secondary-custom {
+    background: var(--accent);
+    margin-top: 15px;
+}
+
+.btn-secondary-custom:hover {
+    background: rgb(110, 140, 130);
+    transform: scale(1.02);
+}
+</style>
