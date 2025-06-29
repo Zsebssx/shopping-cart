@@ -1,54 +1,537 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Iniciar sesión</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIENDA DREA - Iniciar sesión hector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #4caf50;
+            --primary-dark: #388e3c;
+            --secondary: #ff9800;
+            --accent: #f44336;
+            --light: #f5f5f5;
+            --dark: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3c27 0%, #0d5d28 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        /* --- particuls--- */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* --- Contenedor Principal --- */
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        /* --- Bienvenida Drea--- */
+        .welcome-panel {
+            flex: 1;
+            background: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-panel::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 100px;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+        
+        .market-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .market-logo i {
+            font-size: 3.5rem;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .market-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .welcome-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .features i {
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* --- Panel de Login --- */
+        .login-panel {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: #666;
+        }
+        
+        /* --- Formulario --- */
+        .login-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .form-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 1.1rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #f9f9f9;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .form-control:focus ~ .form-icon {
+            color: var(--primary);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            cursor: pointer;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .facebook {
+            background: #3b5998;
+        }
+        
+        .google {
+            background: #dd4b39;
+        }
+        
+        .twitter {
+            background: #1da1f2;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .register-link {
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        .register-link a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .register-link a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* --- alertas --- */
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid transparent;
+            font-weight: 500;
+        }
+        
+        .alert-danger {
+            background-color: rgba(244, 67, 54, 0.15);
+            color: #d32f2f;
+            border-color: rgba(244, 67, 54, 0.3);
+        }
+        
+        .alert-success {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: #388e3c;
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+        
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .welcome-panel {
+                padding: 30px 20px;
+            }
+            
+            .login-panel {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-	<section>
-		<div class="container mt-5 p-5">
-			<div class="row">
-				<div class="col-md-6 p-5">
-					<img alt="Imagen de login" src="img/ecom.png" width="100%" height="400px">
-				</div>
-				<div class="col-md-6 mt-3 p-5">
-					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-header">
-							<p class="fs-4 text-center">Iniciar Sesión</p>
-							<div th:if="${param.error}"
-								class="alert alert-danger text-center">
-								<th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
-									[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
-								</th:block>
-							</div>
-							<div th:if="${param.logout}" class="alert alert-success">
-								Cierre de sesión exitoso
-							</div>
-						</div>
-						<div class="card-body">
-							<form action="/login" method="post">
-								<div class="mb-3">
-									<label class="form-label">Correo electrónico</label>
-									<input required class="form-control" name="username" type="email">
-								</div>
-								<div class="mb-3">
-									<label class="form-label">Contraseña</label>
-									<input required class="form-control" name="password" type="password">
-								</div>
-								<button type="submit" class="btn bg-primary text-white col-md-12">
-									Iniciar sesión
-								</button>
-							</form>
-						</div>
-						<div class="card-footer text-center">
-							<a href="/forgot-password" class="text-decoration-none">¿Olvidaste tu contraseña?</a><br>
-							¿No tienes una cuenta? <a href="register" class="text-decoration-none">Crea una aquí</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- partículs -->
+    <div id="tsparticles"></div>
+    
+    <div class="login-container">
+        <!-- Panel de Bienvenida Drea -->
+        <div class="welcome-panel">
+            <div class="market-logo">
+                <i class="fas fa-shopping-basket"></i>
+                <h1>TIENDA DREA</h1>
+            </div>
+            
+            <div class="welcome-content">
+                <h2>Bienvenido de nuevo a  TIENDA DREA</h2>
+                <p>Accede a tu cuenta para disfrutar de todas las ventajas de nuestro supermercado online TIENDA DREA. Ofertas exclusivas, seguimiento de pedidos y mucho más.</p>
+                
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Ofertas exclusivas para miembros</li>
+                    <li><i class="fas fa-check"></i> Historial de compras</li>
+                    <li><i class="fas fa-check"></i> Listas de compras guardadas</li>
+                    <li><i class="fas fa-check"></i> Descuentos personalizados</li>
+                    <li><i class="fas fa-check"></i> Entrega rápida prioritaria</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Panel de Login -->
+        <div class="login-panel">
+            <div class="login-header">
+                <h2>Iniciar Sesión a TIENDA DREA</h2>
+                <p>Ingresa tus credenciales para acceder a tu cuenta</p>
+            </div>
+            
+            <!-- Alerta de Spring Security -->
+            <div th:if="${param.error}" class="alert alert-danger">
+                <th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">
+                    <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+                </th:block>
+            </div>
+            
+            <div th:if="${param.logout}" class="alert alert-success">
+                Cierre de sesión exitoso
+            </div>
+            
+            <form class="login-form" action="/login" method="post">
+                <div class="form-group">
+                    <i class="fas fa-envelope form-icon"></i>
+                    <input id="email" required class="form-control" name="username" type="email" placeholder="Correo electrónico">
+                </div>
+                
+                <div class="form-group">
+                    <i class="fas fa-lock form-icon"></i>
+                    <input id="password" required class="form-control" name="password" type="password" placeholder="Contraseña">
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Recordarme</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">Iniciar sesión</button>
+                
+                <div class="divider">
+                    <span>O continúa con</span>
+                </div>
+                
+                <div class="social-login">
+                    <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+                
+                <div class="register-link">
+                    ¿No tienes una cuenta? <a href="register" class="text-decoration-none">Crea una aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // confi de mis particuls
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof tsParticles !== 'undefined') {
+                tsParticles.load("tsparticles", {
+                    fpsLimit: 60,
+                    interactivity: {
+                        events: {
+                            onHover: {
+                                enable: true,
+                                mode: "bubble"
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            bubble: {
+                                distance: 100,
+                                duration: 2,
+                                size: 15,
+                                opacity: 0.8,
+                                color: "#4CAF50"
+                            }
+                        }
+                    },
+                    particles: {
+                        color: {
+                            value: ["#4CAF50", "#FF9800", "#F44336", "#2196F3"]
+                        },
+                        links: {
+                            enable: false
+                        },
+                        collisions: {
+                            enable: true
+                        },
+                        move: {
+                            direction: "none",
+                            enable: true,
+                            outModes: "bounce",
+                            random: true,
+                            speed: 1.5,
+                            straight: false
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                                area: 800
+                            },
+                            value: 60
+                        },
+                        opacity: {
+                            value: 0.3
+                        },
+                        shape: {
+                            type: ["circle", "square", "triangle"]
+                        },
+                        size: {
+                            value: { min: 2, max: 6 }
+                        }
+                    },
+                    detectRetina: true
+                });
+            }
+            
+            // Toggle para ver mi contraseña
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    togglePassword.classList.toggle('fa-eye');
+                    togglePassword.classList.toggle('fa-eye-slash');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
