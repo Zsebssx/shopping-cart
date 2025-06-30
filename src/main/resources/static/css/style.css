@@ -113,3 +113,8 @@
   margin-top: 30px;
   font-size: 14px;
 }
+
+body {
+  padding-top: 60px; /* altura real del navbar gotis */
+}
+
