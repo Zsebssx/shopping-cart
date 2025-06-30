@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Detalle del Producto</title>
 </head>
 <body>
@@ -31,63 +31,60 @@
 
 						<p class="fs-3">[[${product.title}]]</p>
 						<p>
-							<span class="fw-bold">Description : </span><br>[[${product.description}]]
+							<span class="fw-bold">Descripción : </span><br>[[${product.description}]]
 						</p>
 						<p>
-							<span class="fw-bold"> Product Details: </span> <br> Status
+							<span class="fw-bold"> Detalles del producto: </span> <br> Estado
 							:
 							<th:block th:if="${product.stock>0}">
-								<span class="badge bg-success">Available</span>
+								<span class="badge bg-success">Disponible</span>
 							</th:block>
 
 							<th:block th:unless="${product.stock>0}">
-								<span class="badge bg-warning">out of stock</span>
+								<span class="badge bg-warning">Agotado</span>
 							</th:block>
 
 
-							<br> Category: [[${product.category}]]<br> Policy : 7
-							Days Replacement & Return
+							<br> Categoría: [[${product.category}]]<br> Política: 7 días para cambios y devoluciones
 						</p>
 						<p class="fs-5 fw-bold">
-							Price :&nbsp; &nbsp; &nbsp; &nbsp;<th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block>
+							Precio :&nbsp; &nbsp; &nbsp; &nbsp;<th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block>
 							[[${product.discountPrice}]] <span
 								class="fs-6 text-decoration-line-through text-secondary">[[${product.price}]]</span>
 							<span class="fs-6  text-success">[[${product.discount}]]%
-								off</span>
+								descuento</span>
 						</p>
 
 						<div class="row">
 							<div class="col-md-4 text-success text-center p-2">
 								<i class="fas fa-money-bill-wave fa-2x"></i>
-								<p>Cash On Delivery</p>
+								<p>Pago contra entrega</p>
 							</div>
 							<div class="col-md-4 text-danger text-center p-2">
 								<i class="fas fa-undo-alt fa-2x"></i>
-								<p>Return Available</p>
+								<p>Devolución disponible</p>
 							</div>
 							<div class="col-md-4 text-primary text-center p-2">
 								<i class="fas fa-truck-moving fa-2x"></i>
-								<p>Free Shipping</p>
+								<p>Envío gratis</p>
 							</div>
 						</div>
 
 						<th:block th:if="${product.stock>0}">
 							<th:block th:if="${user==null}">
-								<a href="/signin" class="btn btn-danger col-md-12">Add To
-									Cart</a>
+								<a href="/signin" class="btn btn-danger col-md-12">Añadir al carrito</a>
 							</th:block>
 
 							<th:block th:unless="${user==null}">
 								<a
 									th:href="@{'/user/addCart?pid='+${product.id}+'&uid='+${user.id}}"
-									class="btn btn-danger col-md-12">Add To Cart</a>
+									class="btn btn-danger col-md-12">Añadir al carrito</a>
 							</th:block>
 
 						</th:block>
 
 						<th:block th:unless="${product.stock>0}">
-							<a href="#" class="btn text-white btn-warning col-md-12">Out
-								of Stock</a>
+							<a href="#" class="btn text-white btn-warning col-md-12">Producto agotado</a>
 						</th:block>
 
 					</div>
