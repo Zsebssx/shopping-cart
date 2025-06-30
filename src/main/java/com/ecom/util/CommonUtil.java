@@ -33,9 +33,10 @@ public class CommonUtil {
 		helper.setFrom("daspabitra55@gmail.com", "Shooping Cart");
 		helper.setTo(reciepentEmail);
 
-		String content = "<p>Hello,</p>" + "<p>You have requested to reset your password.</p>"
-				+ "<p>Click the link below to change your password:</p>" + "<p><a href=\"" + url
-				+ "\">Change my password</a></p>";
+		String content = "<p>Hola,</p>"
+		        + "<p>Has solicitado restablecer tu contraseña.</p>"
+		        + "<p>Haz clic en el siguiente enlace para cambiar tu contraseña:</p>"
+		        + "<p><a href=\"" + url + "\">Cambiar mi contraseña</a></p>";
 		helper.setSubject("Password Reset");
 		helper.setText(content, true);
 		mailSender.send(message);
@@ -55,14 +56,14 @@ public class CommonUtil {
 	public Boolean sendMailForProductOrder(ProductOrder order,String status) throws Exception
 	{
 		
-		msg="<p>Hello [[name]],</p>"
-				+ "<p>Thank you order <b>[[orderStatus]]</b>.</p>"
-				+ "<p><b>Product Details:</b></p>"
-				+ "<p>Name : [[productName]]</p>"
-				+ "<p>Category : [[category]]</p>"
-				+ "<p>Quantity : [[quantity]]</p>"
-				+ "<p>Price : [[price]]</p>"
-				+ "<p>Payment Type : [[paymentType]]</p>";
+		msg = "<p>Hola [[name]],</p>"
+			    + "<p>Gracias por tu pedido. Estado: <b>[[orderStatus]]</b>.</p>"
+			    + "<p><b>Detalles del producto:</b></p>"
+			    + "<p>Nombre: [[productName]]</p>"
+			    + "<p>Categoría: [[category]]</p>"
+			    + "<p>Cantidad: [[quantity]]</p>"
+			    + "<p>Precio: [[price]]</p>"
+			    + "<p>Tipo de pago: [[paymentType]]</p>";
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -70,13 +71,13 @@ public class CommonUtil {
 		helper.setFrom("daspabitra55@gmail.com", "Shooping Cart");
 		helper.setTo(order.getOrderAddress().getEmail());
 
-		msg=msg.replace("[[name]]",order.getOrderAddress().getFirstName());
-		msg=msg.replace("[[orderStatus]]",status);
-		msg=msg.replace("[[productName]]", order.getProduct().getTitle());
-		msg=msg.replace("[[category]]", order.getProduct().getCategory());
-		msg=msg.replace("[[quantity]]", order.getQuantity().toString());
-		msg=msg.replace("[[price]]", order.getPrice().toString());
-		msg=msg.replace("[[paymentType]]", order.getPaymentType());
+		msg = msg.replace("[[name]]", order.getOrderAddress().getFirstName());
+		msg = msg.replace("[[orderStatus]]", status);
+		msg = msg.replace("[[productName]]", order.getProduct().getTitle());
+		msg = msg.replace("[[category]]", order.getProduct().getCategory());
+		msg = msg.replace("[[quantity]]", order.getQuantity().toString());
+		msg = msg.replace("[[price]]", order.getPrice().toString());
+		msg = msg.replace("[[paymentType]]", order.getPaymentType());
 		
 		helper.setSubject("Product Order Status");
 		helper.setText(msg, true);
