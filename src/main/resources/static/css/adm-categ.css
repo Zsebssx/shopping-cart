@@ -1,4 +1,5 @@
 :root {
+    /* 🎨 Colores base */
     --categ-bg-page: #FFFBDE;
     --categ-card-bg: #FFFFFF;
     --categ-card-border: #DED3C4;
@@ -15,21 +16,18 @@
     --categ-table-row-hover: #F4EBD3;
 }
 
-.categ-body {
-    background: var(--categ-bg-page);
-    font-family: 'Segoe UI', sans-serif;
-    color: var(--categ-text-primary);
-}
-
+/* 🪐 Card contenedor */
 .categ-card {
     background: var(--categ-card-bg);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
     border: 1px solid var(--categ-card-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     margin-bottom: 20px;
+    padding: 1rem;
 }
 
+/* 🪐 Header de tarjeta */
 .categ-card-header {
     background: var(--categ-header-bg);
     color: var(--categ-header-text);
@@ -38,20 +36,22 @@
     padding: 10px;
 }
 
+/* 🪐 Labels de formulario */
 .categ-form-label {
-    font-weight: 600;
-    color: var(--categ-text-secondary);
     display: block;
     margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--categ-text-secondary);
 }
 
+/* 🪐 Inputs de formulario */
 .categ-form-control {
+    width: 100%;
+    padding: 8px;
     border-radius: 8px;
     border: 1px solid var(--categ-input-border);
-    padding: 8px;
-    color: var(--categ-text-primary);
     background: var(--categ-input-bg);
-    width: 100%;
+    color: var(--categ-text-primary);
 }
 
 .categ-form-control:focus {
@@ -60,38 +60,59 @@
     outline: none;
 }
 
-.categ-btn-primary, .categ-btn-danger {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    transition: background 0.3s, transform 0.2s;
+/* 🪐 Botones base */
+.categ-btn-primary,
+.categ-btn-danger,
+.categ-btn-secondary-custom {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    color: #FFFFFF;
     text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
+/* 🪐 Botón Primario */
 .categ-btn-primary {
     background: var(--categ-btn-bg);
 }
 
 .categ-btn-primary:hover {
     background: var(--categ-btn-hover-bg);
-    transform: scale(1.02);
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* 🪐 Botón de Peligro */
 .categ-btn-danger {
     background: #dc3545;
 }
 
 .categ-btn-danger:hover {
     background: #c82333;
-    transform: scale(1.02);
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* 🪐 Botón Secundario Personalizado */
+.categ-btn-secondary-custom {
+    background: var(--categ-text-primary);
+}
+
+.categ-btn-secondary-custom:hover {
+    background: #315f85;
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 🪐 Tabla de categorías */
 .categ-table thead {
     background: var(--categ-header-bg);
     color: var(--categ-header-text);
@@ -101,24 +122,8 @@
     background: var(--categ-table-row-hover);
 }
 
+/* 🪐 Imagen redondeada */
 .categ-rounded-img {
     border-radius: 8px;
     object-fit: cover;
-}
-
-.categ-btn-secondary-custom {
-    background: var(--categ-text-primary);
-    color: white;
-    font-weight: 600;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.categ-btn-secondary-custom:hover {
-    background: #315f85;
-    transform: scale(1.02);
 }

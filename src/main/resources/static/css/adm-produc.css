@@ -1,107 +1,231 @@
 :root {
-    --admproducts-bg: #FFFBDE;
-    --admproducts-card-bg: #DED3C4;
-    --admproducts-table-bg: #F4EBD3;
-    --admproducts-primary: #749BC2;
-    --admproducts-primary-hover: #91C8E4;
-    --admproducts-secondary: #4682A9;
-    --admproducts-text: #555879;
+    --prod-bg: #FFFDF5;
+    --prod-card-bg: #FFFFFF;
+    --prod-card-border: #E0DCD5;
+    --prod-header-bg: linear-gradient(90deg, #8AB6D6, #5D8AA8);
+    --prod-header-text: #FFFFFF;
+    --prod-primary: #5D8AA8;
+    --prod-primary-hover: #3B6A89;
+    --prod-secondary: #4B6587;
+    --prod-danger: #D64545;
+    --prod-danger-hover: #B03030;
+    --prod-text: #424C55;
+    --prod-table-hover: #F2EFE9;
 }
 
-.admproducts-body {
+body {
+    background: var(--prod-bg);
     font-family: 'Segoe UI', sans-serif;
-    color: var(--admproducts-text);
-    padding-top: 60px;
+    color: var(--prod-text);
+    padding-top: 70px;
+    margin: 0;
 }
 
-.admproducts-card {
-    background: var(--admproducts-card-bg);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 12px;
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 1rem;
 }
 
-.admproducts-title {
+.prod-card {
+    background: var(--prod-card-bg);
+    border: 1px solid var(--prod-card-border);
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    padding: 1.2rem;
+    margin-bottom: 24px;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.prod-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.prod-title {
     text-align: center;
-    font-size: 45px;
-    font-weight: 900;
-    color: var(--admproducts-secondary);
-    margin-bottom: 35px;
-    margin-top:35px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--prod-secondary);
+    margin: 1rem 0;
 }
 
-.admproducts-btn,
-.admproducts-btn-sm,
-.admproducts-btn-sm-danger 
-{
-    border: none;
-    border-radius: 6px;
-     padding: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    color: #fff;
-    text-decoration: none;
+.prod-btn,
+.prod-btn-sm,
+.prod-btn-danger,
+.prod-btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
-.admproducts-btn {
-    background: var(--admproducts-primary);
-   
+.prod-btn, .prod-btn-sm {
+    background: var(--prod-primary);
+    margin: 5px;
 }
 
-.admproducts-btn:hover {
-    background: var(--admproducts-primary-hover);
-    transform: scale(1.04);
+.prod-btn:hover, .prod-btn-sm:hover {
+    background: var(--prod-primary-hover);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-.admproducts-btn-sm {
-    background: var(--admproducts-primary);
+.prod-btn-danger {
+    background: var(--prod-danger);
 }
 
-.admproducts-btn-sm:hover {
-    background: var(--admproducts-primary-hover);
+.prod-btn-danger:hover {
+    background: var(--prod-danger-hover);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.prod-btn-secondary {
+    background: var(--prod-secondary);
+}
+
+.prod-btn-secondary:hover {
+    background: #32485F;
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--prod-card-border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.prod-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.prod-table thead {
+    background: var(--prod-header-bg);
+    color: var(--prod-header-text);
+}
+
+.prod-table th, .prod-table td {
+    text-align: center;
+    padding: 1%;
+    border-bottom: 1px solid var(--prod-card-border);
+}
+
+.prod-table tbody tr:hover {
+    background: var(--prod-table-hover);
+}
+
+.prod-img {
+    border-radius: 1px;
+    width: 95px;
+    height: 95px;
+    transition: transform 0.3s;
+    
+}
+
+.prod-img:hover {
     transform: scale(1.05);
 }
 
-.admproducts-btn-sm-danger {
-    background: #c0392b;
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
-.admproducts-btn-sm-danger:hover {
-    background: #e74c3c;
-    transform: scale(1.05);
+.pagination-container a {
+    padding: 8px 12px;
+    background: var(--prod-card-bg);
+    border-radius: 6px;
+    color: var(--prod-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s;
 }
 
-.admproducts-table {
-    background:#ffff;
+.pagination-container a:hover {
+    background: var(--prod-primary-hover);
+    color: #fff;
 }
 
-.admproducts-table th,
-.admproducts-table td {
-    vertical-align: middle;
+.pagination-container a.active {
+    background: var(--prod-primary);
+    color: #fff;
+}
+
+.pagination-container a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.msg-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
     text-align: center;
 }
 
-.admproducts-thead {
-    background: var(--admproducts-primary);
-    color: #fff;
+.msg-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.admproducts-pagination .page-link {
-    color: var(--admproducts-primary);
+.prod-total {
+    text-align: right;
+    font-weight: 600;
+    margin-top: 10px;
+    color: var(--prod-secondary);
 }
 
-.admproducts-pagination .page-item.active .page-link {
-    background: var(--admproducts-primary);
-    color: #fff;
-    border: none;
-}
-
-.admproducts-pagination .page-link:hover {
-    background: var(--admproducts-primary-hover);
-    color: #fff;
+@media (max-width: 600px) {
+    .prod-title {
+        font-size: 1.5rem;
+    }
+    .prod-btn, .prod-btn-sm {
+        width: 100%;
+        justify-content: center;
+    }
+    .search-form {
+        flex-direction: column;
+    }
+     .prod-img {
+        width: 60px;
+        height: 60px;
+    }
+    
 }
