@@ -1,122 +1,658 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>REGISTRATE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIENDA DREA - Registro hector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #4caf50;
+            --primary-dark: #388e3c;
+            --secondary: #ff9800;
+            --accent: #f44336;
+            --light: #f5f5f5;
+            --dark: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3c27 0%, #0d5d28 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .register-container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .market-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .market-logo i {
+            font-size: 3rem;
+            color: white;
+            background: var(--primary);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        
+        .market-logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .welcome-content {
+            background: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 164px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .welcome-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-top: 20px;
+            padding-left: 0;
+        }
+        
+        .features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .features i {
+            background: rgba(255, 255, 255, 0.2);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 0.8rem;
+        }
+        
+        /* --- Panel de Registro --- */
+        .register-panel {
+            padding: 40px;
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .register-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+        
+        .register-header p {
+            color: #666;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .card-header {
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-weight: 600;
+            font-size: 1.4rem;
+            padding: 20px;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #444;
+        }
+        
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #f9f9f9;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .card-footer {
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        .card-footer a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .card-footer a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* --- alertas --- */
+        .alert {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid transparent;
+            font-weight: 500;
+        }
+        
+        .alert-danger {
+            background-color: rgba(244, 67, 54, 0.15);
+            color: #d32f2f;
+            border-color: rgba(244, 67, 54, 0.3);
+        }
+        
+        .alert-success {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: #388e3c;
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+        
+        .image-upload-container {
+            margin: 20px 0;
+        }
+        
+        .image-upload-box {
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-upload-box:hover {
+            border-color: var(--primary);
+            background-color: #f0f9f0;
+        }
+        
+        .image-upload-box i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .image-upload-text {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        .file-name {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        #profileImage {
+            display: none;
+        }
+        
+        .preview-container {
+            display: none;
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .preview-image {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            margin: 0 auto;
+        }
+        
+        .change-image-btn {
+            margin-top: 10px;
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .welcome-content {
+                padding: 30px 20px;
+            }
+            
+            .register-panel {
+                padding: 30px 20px;
+            }
+            
+            .market-logo i {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 2rem;
+            }
+            
+            .market-logo h1 {
+                font-size: 1.6rem;
+            }
+            
+            .welcome-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .image-upload-box {
+                min-height: 150px;
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-	<section>
-		<div class="container mt-5 p-5">
-			<div class="row">
-				<div class="col-md-5 p-5">
-					<img alt="" src="img/ecom.png" width="100%" height="400px">
-				</div>
-				<div class="col-md-7 p-2">
-					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-header text-center">
-							<p class="fs-4 text-center">Registro</p>
-							<th:block th:if="${session.succMsg}">
-								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+    <div id="tsparticles"></div>
+    
+    <div class="container register-container">
+        <div class="row">
+            <div class="col-md-5 welcome-content">
+                <div class="market-logo">
+                    <i class="fas fa-shopping-basket"></i>
+                    <h1>TIENDA DREA</h1>
+                </div>
+                
+                <div>
+                    <h2>¡Únete a TIENDA DREA!</h2>
+                    <p>Regístrate para disfrutar de todas las ventajas de nuestro supermercado online. Ofertas exclusivas, seguimiento de pedidos y mucho más.</p>
+                    
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Descuentos exclusivos para nuevos miembros</li>
+                        <li><i class="fas fa-check"></i> Historial de compras</li>
+                        <li><i class="fas fa-check"></i> Guarda tus listas de compra</li>
+                        <li><i class="fas fa-check"></i> Acumula puntos en cada compra</li>
+                        <li><i class="fas fa-check"></i> Entrega rápida prioritaria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-7 register-panel">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Registro
+                        
+                        <th:block th:if="${session.succMsg}">
+                            <p class="text-success fw-bold mt-2">[[${session.succMsg}]]</p>
+                            <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                        </th:block>
 
-							<th:block th:if="${session.errorMsg}">
-								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
-						</div>
-						<div class="card-body">
-							<form action="/saveUser" enctype="multipart/form-data" id="userRegister" novalidate
-								method="post">
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Nombre completo</label> <input required
-											class="form-control" name="name" type="text">
-									</div>
-
-									<div class="col">
-										<label class="form-label">Celular</label> <input
-											required class="form-control" name="mobileNumber"
-											type="number">
-									</div>
-
-								</div>
-
-								<div class="mb-3">
-									<label class="form-label">Correo</label> <input required
-										class="form-control" name="email" type="email">
-								</div>
-
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Direccion</label> <input required
-											class="form-control" name="address" type="text">
-									</div>
-
-									<div class="col">
-										<label class="form-label">Ciudad</label> <input required
-											class="form-control" name="city" type="text">
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Distrito</label> <input required
-											class="form-control" name="state" type="text">
-									</div>
-
-									<div class="col">
-										<label class="form-label">Codigo postal</label> <input required
-											class="form-control" name="pincode" type="number">
-									</div>
-
-								</div>
-
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Password</label> <input required
-											class="form-control" name="password" type="password" id="pass">
-									</div>
-
-									<div class="col">
-										<label class="form-label">Confirm password</label> <input
-											required class="form-control" name="confirmpassword"
-											type="password">
-									</div>
-
-								</div>
-
-
-
-								<div class="mb-3">
-									<label class="form-label">Imagen de perfil</label> <input
-										class="form-control" name="img" type="file">
-								</div>
-
-
-
-
-
-
-								<button type="submit"
-									class="btn bg-primary text-white col-md-12">Register</button>
-							</form>
-						</div>
-
-						<div class="card-footer text-center">
-
-							have an account ? <a href="/login" class="text-decoration-none">Login
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</section>
+                        <th:block th:if="${session.errorMsg}">
+                            <p class="text-danger fw-bold mt-2">[[${session.errorMsg}]]</p>
+                            <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                        </th:block>
+                    </div>
+                    
+                    <div class="card-body">
+                        <form action="/saveUser" enctype="multipart/form-data" id="userRegister" novalidate method="post">
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre completo</label>
+                                    <input required class="form-control" name="name" type="text">
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Celular</label>
+                                    <input required class="form-control" name="mobileNumber" type="number">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Correo electrónico</label>
+                                <input required class="form-control" name="email" type="email">
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Dirección</label>
+                                    <input required class="form-control" name="address" type="text">
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Ciudad</label>
+                                    <input required class="form-control" name="city" type="text">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Distrito</label>
+                                    <input required class="form-control" name="state" type="text">
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Código postal</label>
+                                    <input required class="form-control" name="pincode" type="number">
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <div class="position-relative">
+                                        <label class="form-label">Contraseña</label>
+                                        <input required class="form-control" name="password" type="password" id="pass">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="position-relative">
+                                        <label class="form-label">Confirmar contraseña</label>
+                                        <input required class="form-control" name="confirmpassword" type="password" id="confirmPass">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="image-upload-container mb-4">
+                                <label class="form-label">Imagen de perfil</label>
+                                <div class="image-upload-box" id="imageUploadBox">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <div class="image-upload-text">Haz clic o arrastra una imagen aquí</div>
+                                    <div class="file-name" id="fileName">No se eligió ningún archivo</div>
+                                    <input type="file" id="profileImage" name="img" accept="image/*">
+                                </div>
+                                <div class="preview-container" id="previewContainer">
+                                    <img src="" class="preview-image" id="previewImage" alt="Vista previa de la imagen">
+                                    <button type="button" class="change-image-btn" id="changeImageBtn">Cambiar imagen</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> y la <a href="#" class="text-decoration-none">política de privacidad</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus me-2"></i>Registrarse
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="card-footer">
+                        ¿Ya tienes una cuenta? <a href="/signin" class="text-decoration-none">Inicia sesión aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof tsParticles !== 'undefined') {
+                tsParticles.load("tsparticles", {
+                    fpsLimit: 60,
+                    interactivity: {
+                        events: {
+                            onHover: {
+                                enable: true,
+                                mode: "bubble"
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            bubble: {
+                                distance: 100,
+                                duration: 2,
+                                size: 15,
+                                opacity: 0.8,
+                                color: "#4CAF50"
+                            }
+                        }
+                    },
+                    particles: {
+                        color: {
+                            value: ["#4CAF50", "#FF9800", "#F44336", "#2196F3"]
+                        },
+                        links: {
+                            enable: false
+                        },
+                        collisions: {
+                            enable: true
+                        },
+                        move: {
+                            direction: "none",
+                            enable: true,
+                            outModes: "bounce",
+                            random: true,
+                            speed: 1.5,
+                            straight: false
+                        },
+                        number: {
+                            density: {
+                                enable: true,
+                                area: 800
+                            },
+                            value: 60
+                        },
+                        opacity: {
+                            value: 0.3
+                        },
+                        shape: {
+                            type: ["circle", "square", "triangle"]
+                        },
+                        size: {
+                            value: { min: 2, max: 6 }
+                        }
+                    },
+                    detectRetina: true
+                });
+            }
+            
+            // agregar imagen de mis archivos
+            const profileImageInput = document.getElementById('profileImage');
+            const imageUploadBox = document.getElementById('imageUploadBox');
+            const fileName = document.getElementById('fileName');
+            const previewContainer = document.getElementById('previewContainer');
+            const previewImage = document.getElementById('previewImage');
+            const changeImageBtn = document.getElementById('changeImageBtn');
+            
+            // Abrir mis carpetas para elegir imagen
+            imageUploadBox.addEventListener('click', () => {
+                profileImageInput.click();
+            });
+            
+            // selecionar una imagen
+            profileImageInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    fileName.textContent = file.name;
+                    
+                    // para mostrar nuestra imagen subida en registro
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                        imageUploadBox.style.display = 'none';
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // para cambiar la imagen
+            changeImageBtn.addEventListener('click', () => {
+                profileImageInput.click();
+            });
+            
+            // para arrastrar mi imagen de perfil
+            imageUploadBox.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUploadBox.style.borderColor = '#4caf50';
+                imageUploadBox.style.backgroundColor = '#e8f5e9';
+            });
+            
+            imageUploadBox.addEventListener('dragleave', () => {
+                imageUploadBox.style.borderColor = '#e0e0e0';
+                imageUploadBox.style.backgroundColor = '#f9f9f9';
+            });
+            
+            imageUploadBox.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUploadBox.style.borderColor = '#e0e0e0';
+                imageUploadBox.style.backgroundColor = '#f9f9f9';
+                
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    const file = e.dataTransfer.files[0];
+                    
+                    // Validacion de nuestra imagen
+                    if (file.type.match('image.*')) {
+                        profileImageInput.files = e.dataTransfer.files;
+                        fileName.textContent = file.name;
+                        
+                        // vista previa de foto de perfill
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                            previewContainer.style.display = 'block';
+                            imageUploadBox.style.display = 'none';
+                        }
+                        
+                        reader.readAsDataURL(file);
+                    } else {
+                        fileName.textContent = 'Por favor, selecciona una imagen válida';
+                    }
+                }
+            });
+            
+            // toggle para mostrar contraseña
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('pass');
+            
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', () => {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    togglePassword.classList.toggle('fa-eye');
+                    togglePassword.classList.toggle('fa-eye-slash');
+                });
+            }
+            
+            // Toggle para ver y confirmacion de contraseña
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPasswordInput = document.getElementById('confirmPass');
+            
+            if (toggleConfirmPassword && confirmPasswordInput) {
+                toggleConfirmPassword.addEventListener('click', () => {
+                    const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    confirmPasswordInput.setAttribute('type', type);
+                    toggleConfirmPassword.classList.toggle('fa-eye');
+                    toggleConfirmPassword.classList.toggle('fa-eye-slash');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
