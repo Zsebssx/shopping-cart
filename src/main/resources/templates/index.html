@@ -189,9 +189,14 @@
 			<div>
 				<h2>SÉ PARTE DE</h2>
 				<img alt="fuerza" src="/img/fuerzaaa.png">
+				<p><b>¡Tú pones el talento y juntos desarrollamos tu potencial!</b>Si tienes 18 años en adelante, te apasiona el trabajo en equipo y tienes muchas ganas de crecer profesionalmente
+					<b>¡Únete a la fuerza verde!</b>		
+				</p>
+				<p>Importante: Nuestras convocatorias son gratuitas y están dirigidas a tod@s.</p>
+				<b>Envianos un correo</b>
 			</div>
 			<div>
-				
+				<img class="img-circular" src="/img/cajera.png" alt="equipo">
 			</div>
 		</div>
 		<!-- End Ultimo SECTOR -->
@@ -260,8 +265,53 @@
 		}
 		
 	#bg-sector {
-		background-color: #d0e6b3;
-	}	
+	background-color: #d0e6b3;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 90px 250px 140px 250px;
+	font-family: 'League Spartan', sans-serif;
+}
+
+#bg-sector h2 {
+	color: #0024a7;
+	font-size: 72px;
+}
+
+#bg-sector img[alt="fuerza"] {
+	width: 250px;
+	margin-bottom: 20px;
+}
+
+#bg-sector p {
+	color: #0024a7;
+	font-size: 32px;
+	line-height: 1.5;
+}
+
+#bg-sector b {
+	font-weight: bold;
+}
+
+#bg-sector > div:first-child {
+	width: 55%;
+}
+
+#bg-sector > div:last-child {
+	width: 40%;
+	display: flex;
+	justify-content: center;
+}
+
+#bg-sector .img-circular {
+	width: 100%;
+	max-width: 400px;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 8px solid #d0e6b3; 
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}	
 </style>
 
 
