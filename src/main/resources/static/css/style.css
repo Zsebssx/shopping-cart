@@ -12,6 +12,21 @@
 	background-color: #4caf50;
 }
 
+<style>
+	.dropdown-menu {
+		min-width: 200px;
+		font-size: 0.95rem;
+	}
+	.dropdown-item {
+		padding: 10px 15px;
+		transition: all 0.2s ease-in-out;
+	}
+	.dropdown-item:hover {
+		background-color: #f0f2f5;
+		font-weight: 500;
+	}
+</style>
+
 .card-sh {
 	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
 }
