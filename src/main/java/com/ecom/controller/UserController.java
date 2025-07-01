@@ -122,13 +122,26 @@ public class UserController {
 	}
 
 	@PostMapping("/save-order")
-	public String saveOrder(@ModelAttribute OrderRequest request, Principal p) throws Exception {
-		// System.out.println(request);
-		UserDtls user = getLoggedInUserDetails(p);
-		orderService.saveOrder(user.getId(), request);
+	public String saveOrder(@ModelAttribute OrderRequest request,
+	                        Principal principal,
+	                        HttpSession session) {
 
-		return "redirect:/user/success";
+	    try {
+	        UserDtls user = getLoggedInUserDetails(principal);
+	        orderService.saveOrder(user.getId(), request);
+
+	        session.setAttribute("succMsg",
+	            "¡Pedido realizado con éxito! Revisa tu correo para la confirmación.");
+
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	        session.setAttribute("warnMsg",
+	            "Tu pedido se registró, pero hubo un problema al enviar el correo de confirmación.");
+	    }
+
+	    return "/user/success";
 	}
+
 
 	@GetMapping("/success")
 	public String loadSuccess() {
