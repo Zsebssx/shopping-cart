@@ -42,9 +42,22 @@
     transform: scale(1.03);
 }
 
+.admorders-table {
+    font-size: 0.95rem;
+}
+
 .admorders-table th,
 .admorders-table td {
     vertical-align: middle;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.admorders-table td:nth-child(5),
+.admorders-table td:nth-child(6),
+.admorders-table td:nth-child(7) {
+    width: 80px;
+    white-space: nowrap;
 }
 
 .admorders-table-hover tbody tr:hover {
@@ -81,4 +94,17 @@
 .admorders-alert-danger {
     background: #f8d7da;
     border: 1px solid #f5c2c7;
+}
+
+/* Ajuste responsivo para tablas en móvil */
+@media (max-width: 768px) {
+    .admorders-table th,
+    .admorders-table td {
+        font-size: 0.85rem;
+        padding: 0.3rem;
+    }
+
+    .admorders-card {
+        padding: 1rem;
+    }
 }
