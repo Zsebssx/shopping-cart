@@ -54,15 +54,17 @@
                         <th>Datos de Entrega</th>
                         <th>Fecha</th>
                         <th>Producto</th>
+                        <th>Cantidad</th>
                         <th>Precio</th>
+                        <th>Total</th>
                         <th>Estado</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
-                 <tbody>
+                <tbody>
                     <!-- Búsqueda -->
                     <th:block th:if="${srch}">
-                        <th:block th:if="${orderDtls!=null}">
+                        <th:block th:if="${orderDtls != null}">
                             <tr>
                                 <td>[[${orderDtls.orderId}]]</td>
                                 <td>
@@ -75,11 +77,9 @@
                                 </td>
                                 <td>[[${orderDtls.orderDate}]]</td>
                                 <td>[[${orderDtls.product.title}]]</td>
-                                <td>
-                                    Cantidad: [[${orderDtls.quantity}]]<br>
-                                    Precio: [[${orderDtls.price}]]<br>
-                                    Total: [[${orderDtls.quantity * orderDtls.price}]]
-                                </td>
+                                <td>[[${orderDtls.quantity}]]</td>
+                                <td>S/ [[${orderDtls.price}]]</td>
+                                <td>S/ [[${orderDtls.quantity * orderDtls.price}]]</td>
                                 <td>[[${orderDtls.status}]]</td>
                                 <td>
                                     <form action="/admin/update-order-status" method="post">
@@ -105,16 +105,16 @@
                                 </td>
                             </tr>
                         </th:block>
-                        <th:block th:unless="${orderDtls!=null}">
+                        <th:block th:unless="${orderDtls != null}">
                             <tr>
-                                <td colspan="7" class="text-center text-danger fs-5">[[${errorMsg}]]</td>
+                                <td colspan="9" class="text-center text-danger fs-5">[[${errorMsg}]]</td>
                             </tr>
                         </th:block>
                     </th:block>
 
                     <!-- Listado normal -->
                     <th:block th:unless="${srch}">
-                        <tr th:each="o:${orders}">
+                        <tr th:each="o : ${orders}">
                             <td>[[${o.orderId}]]</td>
                             <td>
                                 [[${o.orderAddress.firstName+' '+o.orderAddress.lastName}]]<br>
@@ -126,11 +126,9 @@
                             </td>
                             <td>[[${o.orderDate}]]</td>
                             <td>[[${o.product.title}]]</td>
-                            <td>
-                                Cantidad: [[${o.quantity}]]<br>
-                                Precio: [[${o.price}]]<br>
-                                Total: [[${o.quantity * o.price}]]
-                            </td>
+                            <td>[[${o.quantity}]]</td>
+                            <td>S/ [[${o.price}]]</td>
+                            <td>S/ [[${o.quantity * o.price}]]</td>
                             <td>[[${o.status}]]</td>
                             <td>
                                 <form action="/admin/update-order-status" method="post">
@@ -170,14 +168,14 @@
                     <nav>
                         <ul class="pagination admorders-pagination justify-content-end mb-0">
                             <li class="page-item" th:classappend="${isFirst} ? 'disabled'">
-                                <a class="page-link" th:href="@{'/admin/orders?pageNo='+${pageNo-1}}">&laquo;</a>
+                                <a class="page-link" th:href="@{'/admin/orders?pageNo=' + ${pageNo - 1}}">&laquo;</a>
                             </li>
-                            <li th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item"
-                                th:classappend="${pageNo+1==i} ? 'active'">
-                                <a class="page-link" th:href="@{'/admin/orders?pageNo='+${i-1}}">[[${i}]]</a>
+                            <li th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"
+                                th:classappend="${pageNo + 1 == i} ? 'active'">
+                                <a class="page-link" th:href="@{'/admin/orders?pageNo=' + ${i - 1}}">[[${i}]]</a>
                             </li>
                             <li class="page-item" th:classappend="${isLast} ? 'disabled'">
-                                <a class="page-link" th:href="@{'/admin/orders?pageNo='+${pageNo+1}}">&raquo;</a>
+                                <a class="page-link" th:href="@{'/admin/orders?pageNo=' + ${pageNo + 1}}">&raquo;</a>
                             </li>
                         </ul>
                     </nav>

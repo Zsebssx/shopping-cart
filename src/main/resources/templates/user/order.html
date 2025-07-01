@@ -16,46 +16,46 @@
 
 
 						<div class="mb-3 row">
-							<p class="text-center fs-4">Billing Address</p>
+							<p class="text-center fs-4">Dirección de facturación</p>
 							<hr>
 							<div class="col p-1">
-								<label>First Name</label> <input type="text" name="firstName" required
+								<label>Nombres</label> <input type="text" name="firstName" required
 									class="form-control mt-1">
 							</div>
 							<div class="col p-1">
-								<label>Last Name</label> <input type="text" name="lastName" required
+								<label>Apellidos</label> <input type="text" name="lastName" required
 									class="form-control mt-1">
 							</div>
 						</div>
 
 						<div class="mb-3 row">
 							<div class="col p-1">
-								<label>Email</label> <input type="email" name="email" required
+								<label>Correo</label> <input type="email" name="email" required
 									class="form-control col">
 							</div>
 							<div class="col p-1">
-								<label>Mobile Number</label> <input type="text" name="mobileNo" required
+								<label>Celular</label> <input type="text" name="mobileNo" required
 									class="form-control col ms-2">
 							</div>
 						</div>
 
 						<div class="mb-3 row">
 							<div class="col p-1">
-								<label>Address</label> <input type="text" name="address" required
+								<label>Dirección</label> <input type="text" name="address" required
 									class="form-control col">
 							</div>
 							<div class="col p-1">
-								<label>City</label> <input type="text" name="city" required
+								<label>Ciudad</label> <input type="text" name="city" required
 									class="form-control col ms-2">
 							</div>
 						</div>
 						<div class="mb-3 row">
 							<div class="col p-1">
-								<label>State</label> <input type="text" name="state" required
+								<label>Distrito</label> <input type="text" name="state" required
 									class="form-control col">
 							</div>
 							<div class="col p-1">
-								<label>Pincode</label> <input type="number" name="pincode" required
+								<label>Código postal</label> <input type="number" name="pincode" required
 									class="form-control col ms-2">
 							</div>
 						</div>
@@ -63,31 +63,31 @@
 
 					</div>
 					<div class="col-md-6">
-						<p class="text-center fs-4">Payment Type</p>
+						<p class="text-center fs-4">Tipo de pago</p>
 						<hr>
 						<div class="card">
 							<div class="card-body">
 								<table class="table table-borderless">
 									<tbody>
 										<tr>
-											<td>Total price</td>
+											<td>Precio Total</td>
 											<td>:</td>
 											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${orderPrice}]]</td>
 										</tr>
 										<tr>
-											<td>Delivery Fee</td>
+											<td>Precio de Delivery</td>
 											<td>:</td>
 											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 250</td>
 										</tr>
 
 										<tr>
-											<td>Tax</td>
+											<td>igv</td>
 											<td>:</td>
 											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 100</td>
 										</tr>
 
 										<tr class="border-top">
-											<td>Total Price</td>
+											<td>Precio total</td>
 											<td>:</td>
 											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${totalOrderPrice}]]</td>
 										</tr>
@@ -101,17 +101,16 @@
 							<div class="card-body">
 								<!-- <form action="/login" method="post"> -->
 								<div class="mb-3">
-									<label class="form-label">Select Payment Type</label> <select required
+									<label class="form-label">Selecciona tipo de pago</label> <select required
 										name="paymentType" class="form-control">
-										<option value="">--select--</option>
-										<option value="COD">Cash On Delivery</option>
-										<option value="ONLINE">Online Payment</option>
+										<option value="">--seleccionar--</option>
+										<option value="COD">Pago contra entrega</option>
+										<option value="ONLINE">Pago Online</option>
 									</select>
 
 								</div>
 
-								<button class="btn bg-primary text-white col-md-12">Place
-									Order</button>
+								<button class="btn bg-primary text-white col-md-12">Realizar pedido</button>
 
 							</div>
 						</div>
