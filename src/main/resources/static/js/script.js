@@ -164,8 +164,8 @@ $orders.validate({
             required: 'El número de celular es obligatorio',
             space: 'No se permiten espacios',
             numericOnly: 'Número inválido',
-            minlength: 'Mínimo 10 dígitos',
-            maxlength: 'Máximo 12 dígitos'
+            minlength: 'Debe tener 9 dígitos',
+            maxlength: 'Debe tener 9 dígitos'
         },
         address: {
             required: 'La dirección es obligatoria',
