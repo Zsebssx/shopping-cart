@@ -90,9 +90,9 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> <i
 								class="fa-solid fa-user"></i> [[${user.name}]]
 						</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-user">
 								<li th:if="${user.role=='ROLE_USER'}"><a
-									class="dropdown-item" href="/user/profile">Profile</a></li>
+									class="dropdown-item" href="/user/profile">Perfil</a></li>
 
 								<li th:if="${user.role=='ROLE_ADMIN'}"><a
 									class="dropdown-item" href="/admin/profile">Perfil</a></li>
@@ -102,8 +102,8 @@
 								<li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
 								<li><hr class="dropdown-divider"></li>
 
-							</ul></li>
-
+							</ul>
+							</li>
 						<!-- <li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/logout"><i
 								class="fa-solid fa-right-to-bracket"></i> Logout</a></li> -->
@@ -189,3 +189,41 @@
 		crossorigin="anonymous"></script>
 </body>
 </html>
+<style>
+	.dropdown-menu-adjusted {
+		transform: translateX(-40px); /* Ajusta este valor según lo comido que esté */
+	}
+	.dropdown-menu {
+		min-width: 200px;
+		font-size: 0.95rem;
+	}
+	.dropdown-item {
+		padding: 10px 15px;
+		transition: all 0.2s ease-in-out;
+	}
+	.dropdown-item:hover {
+		background-color: #f0f2f5;
+		font-weight: 500;
+	}
+	/* Estilo global para dropdowns */
+	.dropdown-menu {
+		min-width: 200px;
+		font-size: 0.95rem;
+	}
+	.dropdown-item {
+		padding: 10px 15px;
+		transition: all 0.2s ease-in-out;
+	}
+	.dropdown-item:hover {
+		background-color: #f0f2f5;
+		font-weight: 500;
+	}
+
+	/* ⛑️ Fix específico para el menú del usuario */
+	.dropdown-menu-user {
+		transform: translateX(-30px); /* Mueve hacia la izquierda para que no se corte */
+		right: 0;
+		left: auto;
+	}
+	
+</style>

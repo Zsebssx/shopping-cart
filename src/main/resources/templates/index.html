@@ -59,15 +59,15 @@
 		
 
 		<!--< Start Category Module -->
-		<div id="categoria-sector" class="container">
-			<div class="row">
-				<p class="text-center fs-4">Categoria</p>
-				<div class="col-md-2 text-center mb-4" th:each="c:${category}">
-					<img th:src="@{'img/category_img/'+${c.imageName}}" class="categoria-img" alt="imagen categoría">
-					<a th:href="@{'/products?category='+${c.id}}" class="categoria-nombre">[[${c.name}]]</a>
-				</div>
+			<div id="categoria-sector" class="container">
+			    <div class="row justify-content-center">
+			        <p class="text-center fs-4">Categoria</p>
+			        <div class="col-6 col-sm-4 col-md-2 text-center mb-4" th:each="c:${category}">
+			            <img th:src="@{'img/category_img/'+${c.imageName}}" class="categoria-img" alt="imagen categoría">
+			            <a th:href="@{'/products?category='+${c.id}}" class="categoria-nombre">[[${c.name}]]</a>
+			        </div>
+			    </div>
 			</div>
-		</div>
 
 				<!-- <div class="col-md-2">
 					<div
@@ -267,6 +267,7 @@
 			#categoria-sector{
 				padding-top: 60px;
 				padding-bottom: 60px;  
+				justify-content: center !important;
 			}
 		
 		#ultimos-sector{
