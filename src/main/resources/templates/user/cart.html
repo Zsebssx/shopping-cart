@@ -1,99 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+
 <head>
     <meta charset="UTF-8">
     <title>Carrito de Compras</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}">
-    <style>
-        .table thead th {
-            background-color: #f8f9fa;
-            color: #343a40;
-        }
-        .table td, .table th {
-            vertical-align: middle;
-        }
-        .btn-qty {
-            font-size: 1.2rem;
-            color: #0d6efd;
-        }
-        .btn-qty:hover {
-            color: #0a58ca;
-        }
-        .card-sh {
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        .btn-pay {
-            padding: 0.75rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 30px;
-        }
-    </style>
 </head>
+
 <body>
 <section>
-    <div class="container mt-5 p-4">
-
-        <div class="card card-sh border-0">
-            <div class="card-header bg-white text-center">
-                <h3 class="fw-bold">🛒 Tu Carrito</h3>
+    <div class="container-fluid mt-5 p-5">
+        <div class="card card-sh">
+            <div class="card-header text-center">
+                <p class="fs-4">Página del Carrito</p>
 
                 <th:block th:if="${session.succMsg}">
-                    <div class="alert alert-success mt-2">[[${session.succMsg}]]</div>
+                    <p class="text-success fw-bold">[[${session.succMsg}]]</p>
                     <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
                 </th:block>
 
                 <th:block th:if="${session.errorMsg}">
-                    <div class="alert alert-danger mt-2">[[${session.errorMsg}]]</div>
+                    <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
                     <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
                 </th:block>
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                        <tr class="text-center">
-                            <th>#</th>
-                            <th>Imagen</th>
-                            <th>Producto</th>
-                            <th>Precio Unitario</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">N.º</th>
+                            <th scope="col">Nombre del Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col" class="text-center">Cantidad</th>
+                            <th scope="col">Precio Total</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cart, c : ${carts}" class="text-center">
-                            <td>[[${c.count}]]</td>
-                            <td><img th:src="${cart.product.image}" width="70" height="70" class="rounded shadow-sm"></td>
-                            <td class="text-start">[[${cart.product.title}]]</td>
-                            <td>S/ [[${cart.product.discountPrice}]]</td>
-                            <td>
-                                <a th:href="@{'/user/cartQuantityUpdate?sy=de&cid=' + ${cart.id}}" class="btn-qty me-2">
-                                    <i class="fa-solid fa-circle-minus"></i>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cart, c : ${carts}">
+                            <th scope="row">[[${c.count}]]</th>
+                            <td>[[${cart.product.title}]]</td>
+                            <td>[[${cart.product.discountPrice}]]</td>
+                            <td class="text-center">
+                                <a th:href="@{'/user/cartQuantityUpdate?sy=de&cid=' + ${cart.id}}">
+                                    <i class="fa-solid fa-minus"></i>
                                 </a>
-                                <span class="fw-bold">[[${cart.quantity}]]</span>
-                                <a th:href="@{'/user/cartQuantityUpdate?sy=in&cid=' + ${cart.id}}" class="btn-qty ms-2">
-                                    <i class="fa-solid fa-circle-plus"></i>
+                                [ [[${cart.quantity}]] ]
+                                <a th:href="@{'/user/cartQuantityUpdate?sy=in&cid=' + ${cart.id}}">
+                                    <i class="fa-solid fa-plus"></i>
                                 </a>
                             </td>
-                            <td>S/ [[${cart.totalPrice}]]</td>
+                            <td>[[${cart.totalPrice}]]</td>
                         </tr>
-
-                        <tr class="table-light fw-bold">
-                            <td colspan="4"></td>
-                            <td class="text-end">Total a Pagar:</td>
-                            <td>S/ [[${totalOrderPrice}]]</td>
+                        <tr>
+                            <td colspan="4" class="fw-bold">Total a Pagar</td>
+                            <td class="fw-bold">
+                                <th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block>
+                                [[${totalOrderPrice}]]
+                            </td>
                         </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
 
-                <div class="text-center mt-4">
-                    <a href="/user/orders" class="btn btn-warning btn-pay shadow-sm">
-                        Proceder con el Pago <i class="fa-solid fa-arrow-right ms-2"></i>
-                    </a>
+                <div class="text-center">
+                    <a href="/user/orders" class="btn btn-warning">Proceder con el Pago</a>
                 </div>
             </div>
         </div>
