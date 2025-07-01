@@ -122,8 +122,8 @@ $orders.validate({
             required: true,
             space: true,
             numericOnly: true,
-            minlength: 10,
-            maxlength: 12
+            minlength: 9,
+            maxlength: 9
         },
         address: {
             required: true,
@@ -165,7 +165,7 @@ $orders.validate({
             space: 'No se permiten espacios',
             numericOnly: 'Número inválido',
             minlength: 'Debe tener 9 dígitos',
-            maxlength: 'Debe tener 9 dígitos'
+            maxlength: 'Debe tener 9 dígitos.'
         },
         address: {
             required: 'La dirección es obligatoria',
