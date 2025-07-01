@@ -5,121 +5,193 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background: #f0f2f5; font-family: 'Segoe UI', sans-serif;">
 	<section>
-
-		<div class="container mt-5 p-5">
+		<div class="container mt-5 p-4">
 			<form action="/user/save-order" method="post" id="orders" novalidate>
-				<div class="row">
-
+				<div class="row g-4">
+					<!-- Datos de facturación -->
 					<div class="col-md-6">
-
-
-						<div class="mb-3 row">
-							<p class="text-center fs-4">Dirección de facturación</p>
+						<div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.06);">
+							<p class="text-center fs-4 fw-bold text-primary">📄 Dirección de Facturación</p>
 							<hr>
-							<div class="col p-1">
-								<label>Nombres</label> <input type="text" name="firstName" required
-									class="form-control mt-1">
-							</div>
-							<div class="col p-1">
-								<label>Apellidos</label> <input type="text" name="lastName" required
-									class="form-control mt-1">
-							</div>
-						</div>
-
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>Correo</label> <input type="email" name="email" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>Celular</label> <input type="text" name="mobileNo" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>Dirección</label> <input type="text" name="address" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>Ciudad</label> <input type="text" name="city" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>Distrito</label> <input type="text" name="state" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>Código postal</label> <input type="number" name="pincode" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-						<!-- </form> -->
-
-					</div>
-					<div class="col-md-6">
-						<p class="text-center fs-4">Tipo de pago</p>
-						<hr>
-						<div class="card">
-							<div class="card-body">
-								<table class="table table-borderless">
-									<tbody>
-										<tr>
-											<td>Precio Total</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${orderPrice}]]</td>
-										</tr>
-										<tr>
-											<td>Precio de Delivery</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 250</td>
-										</tr>
-
-										<tr>
-											<td>igv</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 100</td>
-										</tr>
-
-										<tr class="border-top">
-											<td>Precio total</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${totalOrderPrice}]]</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="card shadow p-3 mb-5 mt-2 bg-body-tertiary rounded">
-
-							<div class="card-body">
-								<!-- <form action="/login" method="post"> -->
-								<div class="mb-3">
-									<label class="form-label">Selecciona tipo de pago</label> <select required
-										name="paymentType" class="form-control">
-										<option value="">--seleccionar--</option>
-										<option value="COD">Pago contra entrega</option>
-										<option value="ONLINE">Pago Online</option>
-									</select>
-
+							<div class="row mb-3">
+								<div class="col">
+									<label class="form-label">Nombres</label>
+									<input type="text" name="firstName" required class="form-control rounded-3 p-2">
 								</div>
-
-								<button class="btn bg-primary text-white col-md-12">Realizar pedido</button>
-
+								<div class="col">
+									<label class="form-label">Apellidos</label>
+									<input type="text" name="lastName" required class="form-control rounded-3 p-2">
+								</div>
 							</div>
+
+							<div class="row mb-3">
+								<div class="col">
+									<label class="form-label">Correo</label>
+									<input type="email" name="email" required class="form-control rounded-3 p-2">
+								</div>
+								<div class="col">
+									<label class="form-label">Celular</label>
+									<input type="text" name="mobileNo" required maxlength="9" minlength="9" pattern="[0-9]{9}" title="Debe tener 9 dígitos" class="form-control rounded-3 p-2">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<div class="col">
+									<label class="form-label">Dirección</label>
+									<input type="text" name="address" required class="form-control rounded-3 p-2">
+								</div>
+								<div class="col">
+									<label class="form-label">Ciudad</label>
+									<input type="text" name="city" required class="form-control rounded-3 p-2">
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<div class="col">
+									<label class="form-label">Distrito</label>
+									<input type="text" name="state" required class="form-control rounded-3 p-2">
+								</div>
+								<div class="col">
+									<label class="form-label">Código postal</label>
+									<input type="number" name="pincode" required class="form-control rounded-3 p-2">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Pago -->
+					<div class="col-md-6">
+						<div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.06);">
+							<p class="text-center fs-4 fw-bold text-success">💳 Tipo de Pago</p>
+							<hr>
+
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td class="fw-semibold">Precio Total</td>
+										<td>:</td>
+										<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${orderPrice}]]</td>
+									</tr>
+									<tr>
+										<td class="fw-semibold">Delivery</td>
+										<td>:</td>
+										<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 250</td>
+									</tr>
+									<tr>
+										<td class="fw-semibold">IGV</td>
+										<td>:</td>
+										<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 100</td>
+									</tr>
+									<tr class="border-top">
+										<td class="fw-bold">Total</td>
+										<td>:</td>
+										<td class="fw-bold"><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${totalOrderPrice}]]</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div class="mt-4">
+								<label class="form-label">Selecciona tipo de pago</label>
+								<select required name="paymentType" class="form-control rounded-3 p-2">
+									<option value="">-- seleccionar --</option>
+									<option value="COD">Pago contra entrega</option>
+									<option value="ONLINE">Pago Online</option>
+								</select>
+							</div>
+
+							<button class="btn btn-primary w-100 mt-4 rounded-3 p-3 fw-bold">✅ Realizar pedido</button>
 						</div>
 					</div>
 
 				</div>
 			</form>
 		</div>
-
 	</section>
 </body>
 </html>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #f1f3f8, #e6ecf3);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .checkout-card {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        padding: 40px;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 0.95rem;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+    }
+
+    .section {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .table td {
+        padding: 10px 5px;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .table td:first-child {
+        font-weight: 600;
+    }
+
+    .btn-checkout {
+        background-color: #0d6efd;
+        border: none;
+        color: white;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-checkout:hover {
+        background-color: #0b5ed7;
+    }
+
+    @media (max-width: 767px) {
+        .checkout-card {
+            padding: 20px;
+        }
+
+        .form-title {
+            font-size: 1.4rem;
+        }
+    }
+</style>
