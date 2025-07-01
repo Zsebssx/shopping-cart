@@ -193,9 +193,9 @@ public class UserController {
 	public String updateProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img, HttpSession session) {
 		UserDtls updateUserProfile = userService.updateUserProfile(user, img);
 		if (ObjectUtils.isEmpty(updateUserProfile)) {
-			session.setAttribute("errorMsg", "Profile not updated");
+			session.setAttribute("errorMsg", "Perfil actualizado correctamente.");
 		} else {
-			session.setAttribute("succMsg", "Profile Updated");
+			session.setAttribute("succMsg", "El perfil no se actualizó.");
 		}
 		return "redirect:/user/profile";
 	}
@@ -212,12 +212,12 @@ public class UserController {
 			loggedInUserDetails.setPassword(encodePassword);
 			UserDtls updateUser = userService.updateUser(loggedInUserDetails);
 			if (ObjectUtils.isEmpty(updateUser)) {
-				session.setAttribute("errorMsg", "Password not updated !! Error in server");
+				session.setAttribute("errorMsg", "No se pudo actualizar la contraseña. Error en el servidor.");
 			} else {
-				session.setAttribute("succMsg", "Password Updated sucessfully");
+				session.setAttribute("succMsg", "Contraseña actualizada correctamente.");
 			}
 		} else {
-			session.setAttribute("errorMsg", "Current Password incorrect");
+			session.setAttribute("errorMsg", "La contraseña actual es incorrecta.");
 		}
 
 		return "redirect:/user/profile";
